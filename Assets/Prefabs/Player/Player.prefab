@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6640264897085682401}
   - component: {fileID: 6687828646355586771}
   - component: {fileID: 1363764891045372197}
+  - component: {fileID: 4011572855797501877}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -106,7 +107,7 @@ Rigidbody:
   m_GameObject: {fileID: 606030698848517996}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0.15
+  m_Drag: 1
   m_AngularDrag: 15
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -128,6 +129,23 @@ MonoBehaviour:
   m_body: {fileID: 6687828646355586771}
   m_turning_speed: 100
   m_speed: 1000
+--- !u!114 &4011572855797501877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606030698848517996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e497881224ad992488b60aa552504448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_health: 100
+  m_joy_num: 1
+  m_gun_list:
+  - {fileID: 5804288021507527451}
+  - {fileID: 8262229017914757090}
 --- !u!1 &6357092276718036569
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +156,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2648001951466473623}
   - component: {fileID: 6807498711093913402}
-  - component: {fileID: 5473228792247406223}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -181,7 +198,7 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1
+    width: 0.5
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -203,14 +220,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &5473228792247406223
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6357092276718036569}
-  m_Enabled: 1
 --- !u!1001 &2289797365357283511
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -222,6 +231,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gun (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3097472702569766344, guid: c169c4ea1121221428be15ef10affb97,
+        type: 3}
+      propertyPath: m_TagString
+      value: Target
       objectReference: {fileID: 0}
     - target: {fileID: 3791139149047638308, guid: c169c4ea1121221428be15ef10affb97,
         type: 3}
@@ -296,7 +310,7 @@ PrefabInstance:
     - target: {fileID: 7885709584198059861, guid: c169c4ea1121221428be15ef10affb97,
         type: 3}
       propertyPath: m_fire_delay
-      value: 0.01
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7885709584198059861, guid: c169c4ea1121221428be15ef10affb97,
         type: 3}
@@ -306,7 +320,7 @@ PrefabInstance:
     - target: {fileID: 7885709584198059861, guid: c169c4ea1121221428be15ef10affb97,
         type: 3}
       propertyPath: m_speed
-      value: 150
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7885709584198059861, guid: c169c4ea1121221428be15ef10affb97,
         type: 3}
@@ -321,6 +335,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2289797365357283511}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8262229017914757090 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7885709584198059861, guid: c169c4ea1121221428be15ef10affb97,
+    type: 3}
+  m_PrefabInstance: {fileID: 2289797365357283511}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7440f5f934f88834d834ab68848fb207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4459498362680775758
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -332,6 +358,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 3097472702569766344, guid: c169c4ea1121221428be15ef10affb97,
+        type: 3}
+      propertyPath: m_TagString
+      value: Target
       objectReference: {fileID: 0}
     - target: {fileID: 3791139149047638308, guid: c169c4ea1121221428be15ef10affb97,
         type: 3}
@@ -406,7 +437,7 @@ PrefabInstance:
     - target: {fileID: 7885709584198059861, guid: c169c4ea1121221428be15ef10affb97,
         type: 3}
       propertyPath: m_fire_delay
-      value: 0.01
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7885709584198059861, guid: c169c4ea1121221428be15ef10affb97,
         type: 3}
@@ -416,7 +447,7 @@ PrefabInstance:
     - target: {fileID: 7885709584198059861, guid: c169c4ea1121221428be15ef10affb97,
         type: 3}
       propertyPath: m_speed
-      value: 150
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7885709584198059861, guid: c169c4ea1121221428be15ef10affb97,
         type: 3}
@@ -431,3 +462,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4459498362680775758}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5804288021507527451 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7885709584198059861, guid: c169c4ea1121221428be15ef10affb97,
+    type: 3}
+  m_PrefabInstance: {fileID: 4459498362680775758}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7440f5f934f88834d834ab68848fb207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

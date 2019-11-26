@@ -11,16 +11,19 @@ public class MovementScript : MonoBehaviour
     private float m_axis_pitch = 0;
     private float m_axis_roll = 0;
     private float m_axis_thrust = 0;
+    private int m_joy_num = 0;
 
+    public void SetController(int num)
+    {
+        m_joy_num = num;
+    }
     private void GetInput()
     {
         //Input grabber for the spaceship
-        m_axis_yaw = Input.GetAxis("Yaw");
-        Debug.Log(Input.GetAxis("Yaw"));
-        m_axis_pitch = Input.GetAxis("Pitch");
-        m_axis_roll = Input.GetAxis("Roll");
-        m_axis_thrust = Input.GetAxis("Thrust");
-        Debug.Log(m_axis_thrust);
+        m_axis_yaw = Input.GetAxis("P" + m_joy_num + "_Yaw");
+        m_axis_pitch = Input.GetAxis("P" + m_joy_num + "_Pitch");
+        m_axis_roll = Input.GetAxis("P" + m_joy_num + "_Roll");
+        m_axis_thrust = Input.GetAxis("P" + m_joy_num + "_Thrust");
     }
 
     private void MovementUpdate()
