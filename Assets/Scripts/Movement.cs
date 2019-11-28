@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementScript : MonoBehaviour
+public class Movement : MonoBehaviour
 {
     public Rigidbody m_body;
     public float m_turning_speed = 0;

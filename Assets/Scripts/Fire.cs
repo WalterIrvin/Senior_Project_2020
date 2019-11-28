@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireScript : MonoBehaviour
+public class Fire : MonoBehaviour
 {
     public GameObject m_bullet;
+    public Transform m_aimpoint;
     public float m_fire_delay;
     public float m_damage;
     public float m_speed;
@@ -50,8 +51,10 @@ public class FireScript : MonoBehaviour
             {
                 GameObject obj = Instantiate(m_bullet);  // spawns a bullet and makes it child of the firescript gameobject
                 obj.transform.rotation = transform.rotation;
-                BulletScript bullet = obj.GetComponent<BulletScript>();
-                Vector3 forward = transform.forward.normalized;
+                Bullet bullet = obj.GetComponent<Bullet>();
+                //Vector3 forward = transform.forward.normalized;
+                m_aimpoint.GetComponent<AimpointController>().UpdateAimpoint(); //Updates the z-axis of the aimpoint to be at the distance of an intersecting object
+                Vector3 forward = (m_aimpoint.position - transform.position).normalized;
                 obj.transform.position = transform.position + forward * 2;
                 bullet.InitAll(forward, m_speed, m_max_range, m_damage);
                 m_bulletList.Add(obj); 
@@ -63,7 +66,7 @@ public class FireScript : MonoBehaviour
         List<GameObject> dead_list = new List<GameObject>();
         foreach (GameObject obj in m_bulletList)
         {
-            BulletScript bullet = obj.GetComponent<BulletScript>();
+            Bullet bullet = obj.GetComponent<Bullet>();
             if (bullet.m_kill)
             {
                 dead_list.Add(obj);

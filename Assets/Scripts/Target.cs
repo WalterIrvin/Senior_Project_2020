@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetScript : MonoBehaviour
+public class Target : MonoBehaviour
 {
     //Wrapper script for basic Target logic, accepts damage input from projectiles when hit, and will destroy if health is <= 0
     public float m_health = 100;

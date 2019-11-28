@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     private float m_damage;
     private Vector3 m_direction;
@@ -27,13 +27,13 @@ public class BulletScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            PlayerScript ps = other.GetComponent<PlayerScript>();
+            Player ps = other.GetComponent<Player>();
             ps.HitPlayer(m_damage);
             m_kill = true;
         }
         else if(other.gameObject.tag == "Target")
         {
-            TargetScript ts = other.GetComponent<TargetScript>();
+            Target ts = other.GetComponent<Target>();
             ts.HitTarget(m_damage);
             m_kill = true;
         }
