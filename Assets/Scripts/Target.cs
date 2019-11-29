@@ -11,7 +11,12 @@ public class Target : MonoBehaviour
         m_health -= damage;
         if (m_health <= 0)
         {
-            Destroy(this.gameObject, 0.5f);
+            this.gameObject.SetActive(false);
+            m_health = 100;
         }
+    }
+    public void Respawn()
+    {
+        m_health = 100;
     }
 }

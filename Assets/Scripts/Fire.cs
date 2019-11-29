@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Fire : MonoBehaviour
 {
+    public Player m_player_ref;
     public GameObject m_bullet;
     public Transform m_aimpoint;
     public float m_fire_delay;
@@ -56,7 +57,11 @@ public class Fire : MonoBehaviour
                 m_aimpoint.GetComponent<AimpointController>().UpdateAimpoint(); //Updates the z-axis of the aimpoint to be at the distance of an intersecting object
                 Vector3 forward = (m_aimpoint.position - transform.position).normalized;
                 obj.transform.position = transform.position + forward * 2;
-                bullet.InitAll(forward, m_speed, m_max_range, m_damage);
+                bullet.InitAll(forward,
+                               m_speed,
+                               m_max_range,
+                               m_damage,
+                               m_player_ref);
                 m_bulletList.Add(obj); 
             }
         }
