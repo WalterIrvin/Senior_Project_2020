@@ -43,6 +43,8 @@ public class Bullet : MonoBehaviour
             ts.HitTarget(m_damage);
             m_kill = true;
         }
+        m_kill = true;
+        
     }
     void Update()
     {

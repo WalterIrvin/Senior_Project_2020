@@ -383,6 +383,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orange Dread
       objectReference: {fileID: 0}
+    - target: {fileID: 8494120096633079653, guid: 42f24d75efaf9a04c8acd880a78f182a,
+        type: 3}
+      propertyPath: m_joy_num
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7977630219931142209, guid: 42f24d75efaf9a04c8acd880a78f182a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -453,11 +458,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 30aa3f2ab4378e14bae05659c469ef84, type: 2}
-    - target: {fileID: 8494120096633079653, guid: 42f24d75efaf9a04c8acd880a78f182a,
-        type: 3}
-      propertyPath: m_joy_num
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6120203386387854476, guid: 42f24d75efaf9a04c8acd880a78f182a,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -813,6 +813,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blue Menace
       objectReference: {fileID: 0}
+    - target: {fileID: 8494120096633079653, guid: 42f24d75efaf9a04c8acd880a78f182a,
+        type: 3}
+      propertyPath: m_joy_num
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7977630219931142209, guid: 42f24d75efaf9a04c8acd880a78f182a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -873,11 +878,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 27282bc2e60ecd4409aeb17149a52e5e, type: 2}
-    - target: {fileID: 8494120096633079653, guid: 42f24d75efaf9a04c8acd880a78f182a,
-        type: 3}
-      propertyPath: m_joy_num
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6120203386387854476, guid: 42f24d75efaf9a04c8acd880a78f182a,
         type: 3}
       propertyPath: m_textInfo.characterCount

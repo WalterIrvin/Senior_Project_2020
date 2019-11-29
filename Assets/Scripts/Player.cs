@@ -24,9 +24,7 @@ public class Player : MonoBehaviour
     private float m_cur_respawn_time;
     void Start()
     {
-        m_wins.SetText("Wins: 0");
-        m_losses.SetText("Losses: 0");
-        m_kills.SetText("Kills: 0");
+        UpdateText();
         m_cur_respawn_time = 5f;
         foreach (Fire gun in m_gun_list)
         {
@@ -39,24 +37,23 @@ public class Player : MonoBehaviour
         ResetRound();
         m_win_count = 0;
         m_loss_count = 0;
-        m_wins.SetText("Wins: 0");
-        m_losses.SetText("Losses: 0");
+        UpdateText();
     }
     public void WinRound()
     {
         m_win_count++;
-        m_wins.SetText("Wins: " + m_win_count);
+        UpdateText();
     }
     public void LoseRound()
     {
         m_loss_count++;
-        m_losses.SetText("Losses: " + m_loss_count);
+        UpdateText();
     }
     public void ResetRound()
     {
         m_kill_count = 0;
-        m_kills.SetText("Kills: " + m_kill_count);
         RespawnShip();
+        UpdateText();
     }
     public void UpdateRoundTimer(float new_time)
     {
@@ -73,7 +70,7 @@ public class Player : MonoBehaviour
     public void AddKill()
     {
         m_kill_count++;
-        m_kills.SetText("Kills: " + m_kill_count);
+        UpdateText();
     }
     public bool HitPlayer(float damage)
     {
@@ -86,6 +83,12 @@ public class Player : MonoBehaviour
             return true;
         }
         return false;
+    }
+    private void UpdateText()
+    {
+        m_wins.SetText("Wins: " + m_win_count);
+        m_losses.SetText("Losses: " + m_loss_count);
+        m_kills.SetText("Kills: " + m_kill_count);
     }
     private void RespawnShip()
     {
