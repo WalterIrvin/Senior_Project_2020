@@ -61,7 +61,7 @@ public class Rocket : MonoBehaviour
     {
         if (m_target_ref != null)
         {
-            Vector3 forward = (m_target_ref.transform.position - transform.position) * m_speed * Time.deltaTime;
+            Vector3 forward =  transform.forward * m_speed * Time.deltaTime * 100; //(m_target_ref.transform.position - transform.position)
             m_cur_range += forward.magnitude;
             if (m_cur_range >= m_range || m_target_ref.activeSelf == false)
             {
