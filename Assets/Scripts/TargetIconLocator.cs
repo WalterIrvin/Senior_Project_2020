@@ -21,7 +21,6 @@ public class TargetIconLocator : MonoBehaviour
             Vector3 camPos = m_canvas.worldCamera.transform.position;
             Vector3 worldDir = (m_trackingCore.transform.position - camPos).normalized;
             float worldAngle = Vector3.Angle(this.transform.forward, worldDir);
-            Debug.Log(worldAngle);
             if (Mathf.Abs(worldAngle) < 90)
             {
                 //Obj is directly behind camera, do not update the angle of the marker
