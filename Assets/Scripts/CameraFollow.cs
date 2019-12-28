@@ -1,13 +1,36 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
+    public Canvas m_canvas;
+    public GameObject m_focusPrefab;
+    public GameObject m_pointerPrefab;
+    public List<Transform> m_otherCores = new List<Transform>();
     public Transform m_target;
     public Transform m_offset;
     public float m_smooth_time = 10.125f; // higher value, less smoothing 0...1
     private float m_angle_per_sec = 10f;
     private Vector3 m_velocity = Vector3.zero;
+    private List<FocusIcon> m_focuserList = new List<FocusIcon>();
+    private List<TargetIconLocator> m_pointerList = new List<TargetIconLocator>();
 
+    void Start()
+    {
+        foreach (Transform core in m_otherCores)
+        {
+            //The focus obj is for the circle that is layered on the enemy, the pointer is the arrow that points towards the enemy when they are offscreen.
+            GameObject obj = Instantiate(m_focusPrefab, m_canvas.transform);
+            FocusIcon focuser = obj.GetComponent<FocusIcon>();
+            focuser.Init(m_canvas, core.gameObject);
+            m_focuserList.Add(focuser);
+
+            GameObject obj2 = Instantiate(m_pointerPrefab, m_canvas.transform);
+            TargetIconLocator pointer = obj2.GetComponent<TargetIconLocator>();
+            pointer.Init(m_canvas, core.gameObject);
+            m_pointerList.Add(pointer);
+        }
+    }
     void Update()
     {
         Vector3 offset_delta = m_offset.position - m_target.position;

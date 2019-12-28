@@ -3,123 +3,97 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    //Wrapper script for basic Player logic, accepts damage input from projectiles when hit, and will destroy if health is <= 0
-    //May need special logic in future to disable controller associated with it unlike just the TargetScript.
-    public TextMeshProUGUI m_round_time;
-    public TextMeshProUGUI m_wins;
-    public TextMeshProUGUI m_losses;
-    public TextMeshProUGUI m_kills;
-    public float m_health = 100;
-    public int m_joy_num = 0; // Sets the controller for this player
-    public float m_respawn_time = 5f; // How many seconds to wait before respawning
-    public Movement m_mover;
-    public List<Fire> m_gun_list; // gun list controlled by the player
-    private int m_kill_count = 0; 
-    private int m_win_count = 0;
-    private int m_loss_count = 0;
-    private bool m_alive = true; // is the player alive? reset to true after respawning if not
-    private float m_cur_respawn_time;
-    void Start()
+    public int m_joystick = 0;
+    public GameObject m_coreRef;
+    public Image m_healthBarRef;
+    public float m_maxHealth = 100;
+    public Targeting m_targetReticule;
+    public TextMeshProUGUI m_curRound;
+    public TextMeshProUGUI m_roundTime;
+    public TextMeshProUGUI m_killCount;
+    public TextMeshProUGUI m_winCount;
+    public TextMeshProUGUI m_lossCount;
+    private float m_curHealth;
+    private int m_kills = 0;
+    private int m_wins = 0;
+    private int m_losses = 0;
+    private float m_respawnTime = 3f;
+    private float m_curRespawnTime = 0;
+    private void Start()
     {
-        UpdateText();
-        m_cur_respawn_time = 5f;
-        foreach (Fire gun in m_gun_list)
+        m_coreRef.GetComponent<Movement>().SetController(m_joystick);
+        m_curHealth = m_maxHealth;
+    }
+    public void Respawn()
+    {
+        m_curHealth = m_maxHealth;
+        m_coreRef.SetActive(true);
+        m_curRespawnTime = 0;
+    }
+    public void RespawnCheck()
+    {
+        //Checks if the core needs to be respawned
+        if(m_coreRef.activeSelf == false)
         {
-            gun.SetJoystick(m_joy_num);
+            m_curRespawnTime += Time.deltaTime;
+            if (m_curRespawnTime >= m_respawnTime)
+            {
+                Respawn();
+            }
         }
-        m_mover.SetController(m_joy_num);
     }
-    public void NewMatch()
+    public bool DamagePlayer(float damage)
     {
-        ResetRound();
-        m_win_count = 0;
-        m_loss_count = 0;
-        UpdateText();
-    }
-    public void WinRound()
-    {
-        m_win_count++;
-        UpdateText();
-    }
-    public void LoseRound()
-    {
-        m_loss_count++;
-        UpdateText();
-    }
-    public void ResetRound()
-    {
-        m_kill_count = 0;
-        RespawnShip();
-        UpdateText();
-    }
-    public void UpdateRoundTimer(float new_time)
-    {
-        m_round_time.SetText("Round Time: " + Mathf.Round(new_time));
-    }
-    public int GetWins()
-    {
-        return m_win_count;
-    }
-    public int GetKillCount()
-    {
-        return m_kill_count;
-    }
-    public void AddKill()
-    {
-        m_kill_count++;
-        UpdateText();
-    }
-    public bool HitPlayer(float damage)
-    {
-        m_health -= damage;
-        if (m_health <= 0)
+        ///Returns true if damage killed player
+        m_curHealth -= damage;
+        if (m_curHealth <= 0)
         {
-            m_mover.gameObject.SetActive(false);
-            m_alive = false;
-            m_health = 100;
+            m_curHealth = 0;
+            m_coreRef.SetActive(false);
             return true;
         }
         return false;
     }
-    private void UpdateText()
+    public void AddKill()
     {
-        m_wins.SetText("Wins: " + m_win_count);
-        m_losses.SetText("Losses: " + m_loss_count);
-        m_kills.SetText("Kills: " + m_kill_count);
+        m_kills++;
     }
-    private void RespawnShip()
+    public void ClearKills()
     {
-        m_alive = true;
-        m_health = 100;
-        m_mover.gameObject.SetActive(true);
-        foreach(Transform child in m_mover.gameObject.transform)
-        {
-            //Sets all the children gameObjects of the core to be active
-            //resets health if target type
-            try
-            {
-                Target target_ref = child.gameObject.GetComponent<Target>();
-                target_ref.Respawn();
-            }
-            catch(Exception)
-            {;}
-            child.gameObject.SetActive(true);
-        }
+        m_kills = 0;
     }
-    void Update()
+    public int GetKills()
     {
-        if (m_alive == false)
-        {
-            m_cur_respawn_time -= Time.deltaTime;
-            if(m_cur_respawn_time <= 0)
-            {
-                RespawnShip();
-                m_cur_respawn_time = m_respawn_time;
-                m_alive = true;
-            }
-        }
+        return m_kills;
+    }
+    public void AddWin()
+    {
+        m_wins++;
+    }
+    public int GetWins()
+    {
+        return m_wins;
+    }
+    public void AddLoss()
+    {
+        m_losses++;
+    }
+    public int GetLosses()
+    {
+        return m_losses;
+    }
+    
+    public void ControllerUpdate(float roundTime, int curRound)
+    {
+        m_roundTime.SetText("Time Left: " + Mathf.Round(roundTime));
+        m_curRound.SetText("Round: " + curRound);
+        m_killCount.SetText("Kills: " + m_kills);
+        m_winCount.SetText("Wins: " + m_wins);
+        m_lossCount.SetText("Losses: " + m_losses);
+        m_healthBarRef.fillAmount = m_curHealth / m_maxHealth;
     }
 }
