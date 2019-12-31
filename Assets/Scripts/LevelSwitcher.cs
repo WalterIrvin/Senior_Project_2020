@@ -10,11 +10,4 @@ public class LevelSwitcher : MonoBehaviour
     {
         SceneManager.LoadScene(name);
     }
-    private void Update()
-    {
-        if (Input.GetAxis("Submit") > 0)
-        {
-            this.gameObject.GetComponent<Button>().onClick.Invoke();
-        }
-    }
 }

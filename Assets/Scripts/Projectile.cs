@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ public class Projectile : MonoBehaviour
     private Player m_playerRef;
     private Vector3 m_convergePoint;
     private Vector3 m_convergeForward;
+    private bool m_willDieAfterSound = false; //Used to prevent annoying sound cutting on bullets
     public void Init(Fire fireScript, GameObject target=null)
     {
         ///Determines the type of the weapon based on what type the gun was, and also sets the gun to "parent" without being bound to its position/rotation
@@ -52,7 +54,7 @@ public class Projectile : MonoBehaviour
             else
             {
                 //If target is inactive, destroy missile
-                this.gameObject.SetActive(false);
+                DelegateDeath();
             }
         }
         else
@@ -61,46 +63,66 @@ public class Projectile : MonoBehaviour
             SimpleMovement();
         }
     }
-    void OnTriggerEnter(Collider other)
+    private void DelegateDeath()
     {
-        if(other.gameObject != m_coreRef)
+        //Handles all death scenarios, makes sure sound finishes playing before destroying object
+        AudioSource soundPlayer = this.gameObject.GetComponent<AudioSource>();
+        if(soundPlayer.isPlaying)
         {
-            //If not colliding with the core ship
-            if (other.gameObject.tag == "Player")
-            {
-                Player otherPlayer = other.transform.parent.gameObject.GetComponent<Player>();
-                bool killResult = otherPlayer.DamagePlayer(m_damage);
-                if (killResult)
-                {
-                    m_playerRef.AddKill();
-                }
-                this.gameObject.SetActive(false);
-            }
+            m_willDieAfterSound = true;
+            MeshRenderer mesh = this.gameObject.GetComponent<MeshRenderer>();
+            mesh.enabled = false;
         }
-        
-        
-    }
-    private void Update()
-    {
-        m_lifeSpan -= Time.deltaTime;
-        if (m_lifeSpan <= 0)
+        else
         {
             this.gameObject.SetActive(false);
         }
-        switch(m_weaponType)
+        
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if(!m_willDieAfterSound)
         {
-            case WeaponType.PLASMA:
-                SimpleMovement();
-                break;
-            case WeaponType.RAIL:
-                SimpleMovement();
-                break;
-            case WeaponType.ROCKET:
-                TrackingMovement();
-                break;
-            default:
-                Debug.LogWarning("Not a valid weaponType in Projectile.cs, weaponType: " + m_weaponType);
-                break;
+            if (other.gameObject != m_coreRef)
+            {
+                //If not colliding with the core ship
+                if (other.gameObject.tag == "Player")
+                {
+                    Player otherPlayer = other.transform.parent.gameObject.GetComponent<Player>();
+                    bool killResult = otherPlayer.DamagePlayer(m_damage);
+                    if (killResult)
+                    {
+                        m_playerRef.AddKill();
+                    }
+                    DelegateDeath();
+                }
+            }
+        } 
+    }
+    private void Update()
+    {
+        if(!m_willDieAfterSound)
+        {
+            m_lifeSpan -= Time.deltaTime;
+            if (m_lifeSpan <= 0)
+            {
+                DelegateDeath();
+            }
+            switch (m_weaponType)
+            {
+                case WeaponType.PLASMA:
+                    SimpleMovement();
+                    break;
+                case WeaponType.RAIL:
+                    SimpleMovement();
+                    break;
+                case WeaponType.ROCKET:
+                    TrackingMovement();
+                    break;
+                default:
+                    Debug.LogWarning("Not a valid weaponType in Projectile.cs, weaponType: " + m_weaponType);
+                    break;
+            }
         }
     }
 }
