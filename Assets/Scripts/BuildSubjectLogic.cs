@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
-
+using System;
+using UnityEngine.EventSystems;
 
 [System.Serializable]
 public class WeaponryInfo
@@ -35,11 +35,24 @@ public class PlayerInfo
 }
 public class BuildSubjectLogic : MonoBehaviour
 {
-    public int m_currentPlayerId = 1; //The current ID to use for the player, is the same as joystick number.
+    private EventSystemInputManager m_inputManager;
+    public Mesh m_defaultMesh;
+    public static int m_currentPlayerId = 1; //The current ID to use for the player, is the same as joystick number.
     public TextMeshProUGUI m_textRef;
     public List<GameObject> m_weaponSlots = new List<GameObject>();
     public List<WeaponryInfo> m_placedWeapons = new List<WeaponryInfo>();
     public static List<PlayerInfo> AllPlayerInfo = new List<PlayerInfo>(); // the static list holding all players build info
+    private void Start()
+    {
+        try
+        {
+            m_inputManager = EventSystem.current.gameObject.GetComponent<EventSystemInputManager>();
+        }
+        catch(Exception)
+        {
+            Debug.LogError("Error, EventSystemInputManager script not found on the current EventSystem, trying attaching one and trying again.");
+        }
+    }
     public List<GameObject> GetWeaponSlots()
     {
         //Returns a list of gameobjects which are the weapon slots of the ship
@@ -65,11 +78,32 @@ public class BuildSubjectLogic : MonoBehaviour
         }
 
     }
+    private void ResetSlots()
+    {
+        //Clears out placed weapons and resets the mesh shown.
+        m_placedWeapons = new List<WeaponryInfo>();
+        foreach(GameObject obj in m_weaponSlots)
+        {
+            obj.GetComponent<MeshFilter>().sharedMesh = m_defaultMesh;
+        }
+    }
     public void FinalizeBuild()
     {
         //Once build is finished, pack up all data and store it into static list to be used during gameplay.
         string finalName = m_textRef.text;
         PlayerInfo newPlayer = new PlayerInfo(m_currentPlayerId, finalName, m_placedWeapons);
         AllPlayerInfo.Add(newPlayer);
+        if (m_currentPlayerId < Input.GetJoystickNames().Length)
+        {
+            m_currentPlayerId++;
+            m_inputManager.UpdateInputManager();
+            ResetSlots();
+        }
+        else
+        {
+            //If all players have built, switch scene to the main game.
+            this.gameObject.GetComponent<LevelSwitcher>().SetLevel(MatchChecker.MatchMap);
+        }
+        
     }
 }

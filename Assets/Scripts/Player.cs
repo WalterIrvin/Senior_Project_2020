@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     private int m_kills = 0;
     private int m_wins = 0;
     private int m_losses = 0;
-    private float m_respawnTime = 3f;
+    private float m_respawnTime = MatchChecker.MatchSpawnDelay;
     private float m_curRespawnTime = 0;
     private void Start()
     {

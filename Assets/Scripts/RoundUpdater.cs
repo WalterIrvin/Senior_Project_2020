@@ -7,9 +7,9 @@ using UnityEngine.SceneManagement;
 public class RoundUpdater : MonoBehaviour
 {
     public static string winning_player = "DebugTesting";
-    private float m_roundTime = 10;
+    private float m_roundTime = MatchChecker.MatchTimer;
     private int m_curRound = 0;
-    private int m_bestOutOf = 3;
+    private int m_bestOutOf = MatchChecker.MatchBestOf;
     public List<Player> m_playerList = new List<Player>();
     private float m_curTime = 0f;
     private void Update()

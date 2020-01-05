@@ -13,6 +13,7 @@ public class InputFieldKeyboard : MonoBehaviour
     public GameObject m_doneArrow;
     public GameObject m_keyboard;
     public GameObject m_firstKey;
+    public TextMeshProUGUI m_textRef;
     public void OpenKeyboard()
     {
         if (EventSystem.current.alreadySelecting == false)
@@ -20,6 +21,8 @@ public class InputFieldKeyboard : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
             m_keyboard.SetActive(true);
             EventSystem.current.SetSelectedGameObject(m_firstKey);
+            m_keyboard.GetComponent<ControllerKeyboard>().ChangeActiveTextField(m_textRef, this);
+
         }
     }
     public void CloseKeyboard()
@@ -27,7 +30,14 @@ public class InputFieldKeyboard : MonoBehaviour
         if (EventSystem.current.alreadySelecting == false)
         {
             EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(m_doneArrow);
+            if(m_doneArrow.GetComponent<Button>().enabled)
+            {
+                EventSystem.current.SetSelectedGameObject(m_doneArrow);
+            }
+            else
+            {
+                EventSystem.current.SetSelectedGameObject(this.gameObject);
+            }
             m_keyboard.SetActive(false);
         }
         

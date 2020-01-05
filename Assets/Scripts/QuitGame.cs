@@ -9,11 +9,4 @@ public class QuitGame : MonoBehaviour
     {
         Application.Quit();
     }
-    void Update()
-    {
-        if (Input.GetAxis("Cancel") > 0)
-        {
-            this.gameObject.GetComponent<Button>().onClick.Invoke();
-        }
-    }
 }

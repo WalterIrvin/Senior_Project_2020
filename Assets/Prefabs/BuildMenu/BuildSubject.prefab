@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 3500294689620872649}
   - component: {fileID: 3500294689620872650}
   - component: {fileID: 3500294689620872651}
+  - component: {fileID: 4829232170692598784}
   - component: {fileID: 5917944068992817100}
   - component: {fileID: 7865395691465153100}
   m_Layer: 0
@@ -282,6 +283,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4829232170692598784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3500294689620872652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f64b3e4f3f19ae54a93b7e4f3fbe31aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_optionalDefaultString: BuildScene
 --- !u!114 &5917944068992817100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,7 +309,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isSelected: 1
-  m_playerNum: 1
 --- !u!114 &7865395691465153100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,11 +321,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171e1ea84d707d34eb34a586ff352eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_textRef: {fileID: 0}
   m_weaponSlots:
   - {fileID: 4510863700613709821}
   - {fileID: 246119161423379482}
   - {fileID: 1576425558470135835}
   - {fileID: 8274235869614387339}
+  m_placedWeapons: []
 --- !u!1 &4510863700613709821
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,11 @@ public class ControllerKeyboard : MonoBehaviour
     /// </summary>
     public TextMeshProUGUI m_textField;
     public InputFieldKeyboard m_inputFieldScript;
+    public void ChangeActiveTextField(TextMeshProUGUI newTextField, InputFieldKeyboard newInputField)
+    {
+        m_textField = newTextField;
+        m_inputFieldScript = newInputField;
+    }
     public void AddKey(string key)
     {
         if(key == "DELETE")

@@ -5,16 +5,16 @@ using UnityEngine;
 public class BuildSubjectRotator : MonoBehaviour
 {
     public bool m_isSelected;
-    public int m_playerNum;
+    
     private float m_axis_yaw = 0;
     private float m_axis_pitch = 0;
     private float m_axis_roll = 0;
     private float m_base_turn_rate = 100;
     private void GetInput()
     {
-        m_axis_yaw = Input.GetAxis("P" + m_playerNum + "_Yaw");
-        m_axis_pitch = Input.GetAxis("P" + m_playerNum + "_Pitch");
-        m_axis_roll = Input.GetAxis("P" + m_playerNum + "_Roll");
+        m_axis_yaw = Input.GetAxis("P" + BuildSubjectLogic.m_currentPlayerId + "_Yaw");
+        m_axis_pitch = Input.GetAxis("P" + BuildSubjectLogic.m_currentPlayerId + "_Pitch");
+        m_axis_roll = Input.GetAxis("P" + BuildSubjectLogic.m_currentPlayerId + "_Roll");
     }
     private void RotationUpdate()
     {
