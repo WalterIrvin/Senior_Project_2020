@@ -8,6 +8,10 @@ using UnityEngine.EventSystems;
 [System.Serializable]
 public class WeaponryInfo
 {
+    /// <summary>
+    /// Serializable class which contains the index slot of the weapon (the weapon slot on the ship)
+    /// also contains the prefab, which is the gameobject to spawn in that location (Plasma, Rocket, etc.)
+    /// </summary>
     public int m_index;
     public GameObject m_prefab;
     public WeaponryInfo(int index, GameObject obj)
@@ -35,6 +39,10 @@ public class PlayerInfo
 }
 public class BuildSubjectLogic : MonoBehaviour
 {
+    /// <summary>
+    /// Script attached to build ref, stores and maintains static list of all player info to be loaded in game once build is finished.
+    /// keeps and maintains list of currently added weaponry and in which locations on the ship weapon array.
+    /// </summary>
     private EventSystemInputManager m_inputManager;
     public Mesh m_defaultMesh;
     public static int m_currentPlayerId = 1; //The current ID to use for the player, is the same as joystick number.
@@ -76,7 +84,6 @@ public class BuildSubjectLogic : MonoBehaviour
             WeaponryInfo newWeapon = new WeaponryInfo(slot, prefab);
             m_placedWeapons.Add(newWeapon);
         }
-
     }
     private void ResetSlots()
     {
@@ -104,6 +111,5 @@ public class BuildSubjectLogic : MonoBehaviour
             //If all players have built, switch scene to the main game.
             this.gameObject.GetComponent<LevelSwitcher>().SetLevel(MatchChecker.MatchMap);
         }
-        
     }
 }

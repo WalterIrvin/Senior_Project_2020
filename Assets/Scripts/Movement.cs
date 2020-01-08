@@ -10,8 +10,8 @@ public class Movement : MonoBehaviour
     private float m_acceleration_rate = 10000; // rate at which to increase acceleration to max 
     private float m_max_accel = 15000;  // max amount of acceleration object can recieve per second ( up to max velocity )
     private float m_max_velocity = 9600;  // max speed object can attain ( this will be number to cap out on when adding force )
-    private float m_max_yaw_rate = 0.4f;  // max num of degrees that object can turn in a second
-    private float m_max_roll_rate = 1.1f;
+    private float m_max_yaw_rate = 0.6f;  // max num of degrees that object can turn in a second
+    private float m_max_roll_rate = 0.9f;
     private float m_max_pitch_rate = 1.5f;
 
     private float m_axis_yaw = 0;
