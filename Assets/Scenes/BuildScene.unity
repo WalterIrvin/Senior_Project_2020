@@ -2304,6 +2304,7 @@ GameObject:
   - component: {fileID: 1247627037}
   - component: {fileID: 1247627036}
   - component: {fileID: 1247627035}
+  - component: {fileID: 1247627038}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2328,7 +2329,7 @@ Camera:
   m_GameObject: {fileID: 1247627034}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0, g: 0.41067523, b: 0.65882355, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -2376,6 +2377,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!45 &1247627038
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247627034}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: e70e488264c6880499106303de3455a7, type: 2}
 --- !u!1 &1506063142
 GameObject:
   m_ObjectHideFlags: 0
@@ -2403,9 +2413,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: bf794509d3ac7854a9011ad7a339e423, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d8ade206badbde74aa0669de5189eb55, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0

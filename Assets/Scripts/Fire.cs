@@ -15,7 +15,7 @@ public class Fire : MonoBehaviour
     private GameObject m_playerRef;
     private GameObject m_coreRef;
     private Player m_playerScript;
-    private int m_maxProjectiles = 40;
+    private int m_maxProjectiles = 200;
     private float m_fireAxis;
     private List<GameObject> m_projectileList = new List<GameObject>();
     private float m_curTimer = 0;
@@ -54,6 +54,7 @@ public class Fire : MonoBehaviour
     }
     private void CheckSpawnProjectile()
     {
+        //Debug.Log("Fired: " + m_fired + ", fireAxis =  " + m_fireAxis + ", projectileCount = " + m_projectileList.Count);
         if (!m_fired && (m_fireAxis > 0 && m_projectileList.Count < m_maxProjectiles))
         {
             GameObject new_projectile = Instantiate(m_projectilePrefab);

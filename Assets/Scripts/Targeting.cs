@@ -10,7 +10,7 @@ public class Targeting : MonoBehaviour
     public MeshCollider m_ownCore;
     public LayerMask m_layermask;
     public GameObject copy;
-    private float m_radius = 5f;
+    private float m_radius = 10f;
     private float m_maxDist = 10000f;
     private List<GameObject> testList = new List<GameObject>();
     private Image m_imageRef;

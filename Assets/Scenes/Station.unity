@@ -3050,6 +3050,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2534866581884222612, guid: a4ec8f950d09bbe468d534051ba2f874,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: a4ec8f950d09bbe468d534051ba2f874,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3110,11 +3115,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f0924cf17f6473449ad6fb329e20e85f, type: 2}
-    - target: {fileID: 2534866581884222612, guid: a4ec8f950d09bbe468d534051ba2f874,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4ec8f950d09bbe468d534051ba2f874, type: 3}
 --- !u!1001 &616555993
@@ -4668,7 +4668,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 5af76ce5dd5a96a4e870206975941414, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e174b0f7aabf05a4790d0b836b13180c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -12197,6 +12197,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Station
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165700731341787384, guid: ab8ab983336887d41879f8cd993db3d8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Neutral
       objectReference: {fileID: 0}
     - target: {fileID: 6365830124253806432, guid: ab8ab983336887d41879f8cd993db3d8,
         type: 3}

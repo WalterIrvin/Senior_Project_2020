@@ -81,33 +81,34 @@ public class Projectile : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if(!m_willDieAfterSound)
+        if (other.gameObject != m_coreRef)
         {
-            if (other.gameObject != m_coreRef)
+            //If not colliding with the core ship
+            if (other.gameObject.tag == "Player")
             {
-                //If not colliding with the core ship
-                if (other.gameObject.tag == "Player")
+                Player otherPlayer = other.transform.parent.gameObject.GetComponent<Player>();
+                bool killResult = otherPlayer.DamagePlayer(m_damage);
+                if (killResult)
                 {
-                    Player otherPlayer = other.transform.parent.gameObject.GetComponent<Player>();
-                    bool killResult = otherPlayer.DamagePlayer(m_damage);
-                    if (killResult)
-                    {
-                        m_playerRef.AddKill();
-                    }
-                    DelegateDeath();
+                    m_playerRef.AddKill();
                 }
+                DelegateDeath();
             }
-        } 
+        }
+        if (other.gameObject.tag == "Neutral")
+        {
+            DelegateDeath();
+        }
     }
     private void Update()
     {
-        if(!m_willDieAfterSound)
+        m_lifeSpan -= Time.deltaTime;
+        if (m_lifeSpan <= 0)
         {
-            m_lifeSpan -= Time.deltaTime;
-            if (m_lifeSpan <= 0)
-            {
-                DelegateDeath();
-            }
+            this.gameObject.SetActive(false);
+        }
+        if (!m_willDieAfterSound)
+        {
             switch (m_weaponType)
             {
                 case WeaponType.PLASMA:
