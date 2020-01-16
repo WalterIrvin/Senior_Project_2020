@@ -6,13 +6,21 @@ public class Movement : MonoBehaviour
 {
     public Rigidbody m_body;
     public Player m_player_ref;
+
+    //Turning accel vars
     private float m_base_turn_rate = 85;
-    private float m_acceleration_rate = 10000; // rate at which to increase acceleration to max 
-    private float m_max_accel = 15000;  // max amount of acceleration object can recieve per second ( up to max velocity )
+    private float m_cur_pitch_rate = 0;
+    private float m_cur_roll_rate = 0;
+    private float m_cur_yaw_rate = 0;
+    private float m_max_turning_rate = 150; // max turning rate accel
+    private float m_angle_friction = 50; // turning friction
+    //Movement accel vars
+    private float m_acceleration_rate = 30000; // rate at which to increase acceleration to max 
+    private float m_max_accel = 30000;  // max amount of acceleration object can recieve per second ( up to max velocity )
     private float m_max_velocity = 9600;  // max speed object can attain ( this will be number to cap out on when adding force )
     private float m_max_yaw_rate = 0.6f;  // max num of degrees that object can turn in a second
-    private float m_max_roll_rate = 0.9f;
-    private float m_max_pitch_rate = 1.5f;
+    private float m_max_roll_rate = 0.6f;
+    private float m_max_pitch_rate = 0.6f;
 
     private float m_axis_yaw = 0;
     private float m_axis_pitch = 0;
@@ -76,12 +84,45 @@ public class Movement : MonoBehaviour
             //If object is currently colliding with something, set the velocity to 0 (to prevent discrepancies between stated and actual velocity)
             m_cur_velocity = 0;
         }
+        SmoothedAngleMovement(ref m_cur_pitch_rate, m_axis_pitch);
+        SmoothedAngleMovement(ref m_cur_roll_rate, m_axis_roll);
+        SmoothedAngleMovement(ref m_cur_yaw_rate, m_axis_yaw);
+
         Vector3 angles;
-        angles.x = m_axis_pitch * m_max_pitch_rate * m_base_turn_rate * Time.deltaTime;
-        angles.y = m_axis_yaw * m_max_yaw_rate * m_base_turn_rate * Time.deltaTime;
-        angles.z = m_axis_roll * m_max_roll_rate * m_base_turn_rate * Time.deltaTime;
+        angles.x = m_cur_pitch_rate * Time.deltaTime;
+        angles.y = m_cur_yaw_rate * Time.deltaTime;
+        angles.z = m_cur_roll_rate * Time.deltaTime;
         transform.Rotate(angles);
         
+    }
+    void SmoothedAngleMovement(ref float cur_angle_rate, float viewed_axis)
+    {
+        Debug.Log(viewed_axis);
+        if (viewed_axis > 0.5 && (cur_angle_rate < m_max_turning_rate || cur_angle_rate < 0))
+        {
+            cur_angle_rate += m_max_turning_rate * Time.deltaTime;
+        }
+        else if (viewed_axis < -0.5 && (Mathf.Abs(cur_angle_rate) < m_max_turning_rate || cur_angle_rate > 0))
+        {
+            cur_angle_rate -= m_max_turning_rate * Time.deltaTime;
+        }
+        else if (Mathf.Abs(viewed_axis) <= 0.5 && Mathf.Abs(cur_angle_rate) > 5)
+        {
+            float angleVal = Mathf.Abs(cur_angle_rate);
+            angleVal -= m_angle_friction;
+            if (cur_angle_rate > 0)
+            {
+                cur_angle_rate = angleVal;
+            }
+            else
+            {
+                cur_angle_rate = -angleVal;
+            }
+            if (Mathf.Abs(cur_angle_rate) <= 50)
+            {
+                cur_angle_rate = 0;
+            }
+        }
     }
     void OnCollisionEnter(Collision other)
     {
