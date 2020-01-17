@@ -109,6 +109,7 @@ public class BuildSubjectLogic : MonoBehaviour
         else
         {
             //If all players have built, switch scene to the main game.
+            m_currentPlayerId = 1;
             this.gameObject.GetComponent<LevelSwitcher>().SetLevel(MatchChecker.MatchMap);
         }
     }
