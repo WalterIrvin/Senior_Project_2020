@@ -95,6 +95,7 @@ public class Projectile : MonoBehaviour
                 DelegateDeath();
             }
         }
+        Debug.Log(other.gameObject.tag);
         if (other.gameObject.tag == "Neutral")
         {
             DelegateDeath();
