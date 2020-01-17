@@ -17,9 +17,13 @@ public class RoundUpdater : MonoBehaviour
         m_curTime += Time.deltaTime;
         if (m_curTime >= m_roundTime)
         {
+            if(RoundWin())
+            { 
+                m_curRound++;
+                //TODO - put some kind of round win screen, like 5 second delay, and then a hard respawn for everyone.
+            }
             m_curTime = 0;
-            m_curRound++;
-            RoundEnd();
+
         }
         foreach (Player player in m_playerList)
         {
@@ -28,7 +32,7 @@ public class RoundUpdater : MonoBehaviour
         }
     }
 
-    private void RoundEnd()
+    private bool RoundWin()
     {
         ///Determines the outcome of the round based on number of kills each player gets. If the round is a tie, nobody wins/loses the round.
         int max_kill = 0;
@@ -82,5 +86,7 @@ public class RoundUpdater : MonoBehaviour
                 }
             }
         }
+        //Returns true if there isn't a tie, ie someone won the round, and if so advances the round counter
+        return !tie;
     }
 }

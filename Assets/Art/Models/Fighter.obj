@@ -1,7 +1,7 @@
 # Blender v2.81 (sub 16) OBJ File: 'Spaceship.blend'
 # www.blender.org
 mtllib Fighter.mtl
-o Spaceplane_Plane.002
+g Spaceplane_SpaceFighter
 v 0.001244 0.189598 -5.889651
 v -2.344011 -0.225408 -4.067133
 v -2.344011 -0.225408 4.673832

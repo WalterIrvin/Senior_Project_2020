@@ -18,17 +18,14 @@ public class Movement : MonoBehaviour
     private float m_angle_friction = 9.7f; // turning friction
     //Movement accel vars
     private float m_acceleration_rate = 7000; // rate at which to increase acceleration to max 
-    private float m_max_accel = 15000;  // max amount of acceleration object can recieve per second ( up to max velocity )
-    private float m_max_velocity = 9600;  // max speed object can attain ( this will be number to cap out on when adding force )
+    private float m_max_vel = 15000;
+    private float m_cur_vel = 0;
 
     private float m_axis_yaw = 0;
     private float m_axis_pitch = 0;
     private float m_axis_roll = 0;
     private float m_axis_thrust = 0;
     private int m_joy_num = 1; //Change
-    private float m_cur_accel = 0; //the current acceleration, gradually increments until equal to max acceleration
-    private float m_cur_velocity = 0; // incremented gradually to max velocity, is the force that gets applied to object
-    private float m_friction = 0;
     private bool m_colliding = false;
 
     public void SetController(int num)
@@ -50,38 +47,12 @@ public class Movement : MonoBehaviour
 
     private void MovementUpdate()
     {
-        
-        if (m_cur_accel < m_max_accel && m_axis_thrust > 0.001)
-        {
-            m_cur_accel += m_acceleration_rate * Time.deltaTime;
-        }
-        else if (m_cur_accel < m_max_accel && m_axis_thrust < -0.001)
-        {
-            m_cur_accel -= m_acceleration_rate * Time.deltaTime;
-        }
-        else
-        {
-            m_cur_accel = 0;
-        }
-        float new_vel = Mathf.Abs(m_cur_velocity + m_cur_accel * Time.deltaTime);  // used to check if adding the cur_acceleration would lower abs of velocity ie. braking force
-        if (Mathf.Abs(m_cur_velocity) < m_max_velocity || new_vel < m_max_velocity)
-        {
-            m_cur_velocity += m_cur_accel * Time.deltaTime;
-        }
-        if (m_cur_accel == 0)
-        {
-            //Reduces the absolute value of the velocity down to zero if acceleration is 0
-            int sign = m_cur_velocity > 0 ? 1 : -1;
-            float new_val = Mathf.Abs(m_cur_velocity) - m_friction * Time.deltaTime;
-            if (new_val < 0)
-                new_val = 0;
-            m_cur_velocity = new_val * sign;
-        }
-        m_body.AddForce(transform.forward * m_cur_velocity * Time.deltaTime);
+        SmoothedLinearMovement(ref m_cur_vel, m_axis_thrust);
+        m_body.AddForce(transform.forward * m_cur_vel * Time.deltaTime);
         if (m_colliding)
         {
             //If object is currently colliding with something, set the velocity to 0 (to prevent discrepancies between stated and actual velocity)
-            m_cur_velocity = 0;
+            m_cur_vel = 0;
         }
         SmoothedAngleMovement(ref m_cur_pitch_rate, m_axis_pitch);
         SmoothedAngleMovement(ref m_cur_roll_rate, m_axis_roll);
@@ -93,6 +64,17 @@ public class Movement : MonoBehaviour
         angles.z = m_cur_roll_rate * Time.deltaTime;
         transform.Rotate(angles);
         
+    }
+    void SmoothedLinearMovement(ref float cur_vel, float viewed_axis)
+    {
+        if (viewed_axis > 0.3 && (cur_vel < m_max_vel || cur_vel < 0))
+        {
+            cur_vel += m_acceleration_rate * Time.deltaTime;
+        }
+        else if (viewed_axis < -0.3 && (Mathf.Abs(cur_vel) < m_max_vel || cur_vel > 0))
+        {
+            cur_vel -= m_acceleration_rate * Time.deltaTime;
+        }
     }
     void SmoothedAngleMovement(ref float cur_angle_rate, float viewed_axis)
     {
@@ -138,15 +120,14 @@ public class Movement : MonoBehaviour
     {
         GetInput();
         MovementUpdate();
-        if(m_cur_velocity < 0)
+        if(m_cur_vel < 0)
         {
             m_fillBar.color = new Color(1, 0, 0);
         }
         else
         {
             m_fillBar.color = new Color(1, 0.69f, 0);
-            Debug.Log(m_fillBar.color);
         }
-        m_fillBar.fillAmount = Mathf.Abs(m_cur_velocity / m_max_velocity);
+        m_fillBar.fillAmount = Mathf.Abs(m_cur_vel / m_max_vel);
     }
 }

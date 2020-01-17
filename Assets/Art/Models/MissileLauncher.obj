@@ -1,7 +1,7 @@
 # Blender v2.81 (sub 16) OBJ File: 'Spaceship.blend'
 # www.blender.org
-mtllib RocketLauncher.mtl
-o Missile_Launcher_Cylinder.001
+mtllib MissileLauncher.mtl
+g Missile_Launcher_Missile_Launcher
 v 0.000000 -0.000017 0.092777
 v 0.000000 0.343922 -0.054345
 v -0.131620 0.317741 -0.054345

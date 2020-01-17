@@ -231,7 +231,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3500294689620872652}
-  m_Mesh: {fileID: -2432090755550338912, guid: ba155d5293fc40545b62435441927c38, type: 3}
+  m_Mesh: {fileID: -4466745959192355448, guid: ba155d5293fc40545b62435441927c38, type: 3}
 --- !u!23 &3500294689620872650
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -295,7 +295,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f64b3e4f3f19ae54a93b7e4f3fbe31aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_optionalDefaultString: BuildScene
 --- !u!114 &5917944068992817100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,6 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171e1ea84d707d34eb34a586ff352eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_defaultMesh: {fileID: 0}
   m_textRef: {fileID: 0}
   m_weaponSlots:
   - {fileID: 4510863700613709821}

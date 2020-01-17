@@ -14,7 +14,6 @@ public class TargetIconLocator : MonoBehaviour
     }
     void Update()
     {
-        //TODO Fix 
         if (m_canvas != null && m_trackingCore != null)
         {
             //Find out if obj is behind player or not, use different ruleset if so
