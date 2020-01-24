@@ -13,18 +13,84 @@ public class Keybinder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool a_button = Input.GetKey(KeyCode.JoystickButton0);
-        bool b_button = Input.GetKey(KeyCode.JoystickButton1);
-        bool x_button = Input.GetKey(KeyCode.JoystickButton2);
-        bool y_button = Input.GetKey(KeyCode.JoystickButton3);
-
-        bool start_button = Input.GetKey(KeyCode.JoystickButton7);
-        bool back_button = Input.GetKey(KeyCode.JoystickButton6);
-
-        bool lb_button = Input.GetKey(KeyCode.JoystickButton4);
-        bool rb_button = Input.GetKey(KeyCode.JoystickButton5);
-
-        bool left_stick_button = Input.GetKey(KeyCode.JoystickButton8);
-        bool right_stick_button = Input.GetKey(KeyCode.JoystickButton9);
+    }
+    private IEnumerator KeyWait()
+    {
+        yield return GetKeyPress();
+    }
+    private IEnumerator GetKeyPress()
+    {
+        float pid = BuildSubjectLogic.m_currentPlayerId;
+        bool done = false;
+        while(!done)
+        {
+            // Key checker 
+            if (Input.GetKeyDown("joystick " + pid + " button 0"))
+            {
+                done = true;
+            }
+            if (Input.GetKeyDown("joystick " + pid + " button 1"))
+            {
+                done = true;
+            }
+            if (Input.GetKeyDown("joystick " + pid + " button 2"))
+            {
+                done = true;
+            }
+            if (Input.GetKeyDown("joystick " + pid + " button 3"))
+            {
+                done = true;
+            }
+            if (Input.GetKeyDown("joystick " + pid + " button 4"))
+            {
+                done = true;
+            }
+            if (Input.GetKeyDown("joystick " + pid + " button 5"))
+            {
+                done = true;
+            }
+            if (Input.GetKeyDown("joystick " + pid + " button 6"))
+            {
+                done = true;
+            }
+            if (Input.GetKeyDown("joystick " + pid + " button 7"))
+            {
+                done = true;
+            }
+            if (Input.GetKeyDown("joystick " + pid + " button 8"))
+            {
+                done = true;
+            }
+            if (Input.GetKeyDown("joystick " + pid + " button 9"))
+            {
+                done = true;
+            }
+            // Axis Checker
+            if (Input.GetAxis("X" + pid + "_axis") > 0.3)
+            {
+                done = true;
+            }
+            if (Input.GetAxis("Y" + pid + "_axis") > 0.3)
+            {
+                done = true;
+            }
+            if (Input.GetAxis("RX" + pid + "_axis") > 0.3)
+            {
+                done = true;
+            }
+            if (Input.GetAxis("RY" + pid + "_axis") > 0.3)
+            {
+                done = true;
+            }
+            if (Input.GetAxis("T" + pid + "_axis") > 0.3)
+            {
+                done = true;
+            }
+        }
+        return null;
+    }
+    public void SetInputBinding(string newInputAxis)
+    {
+        KeyWait();
     }
 }
