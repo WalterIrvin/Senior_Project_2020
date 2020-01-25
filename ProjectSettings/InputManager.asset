@@ -533,3 +533,195 @@ InputManager:
     type: 2
     axis: 27
     joyNum: 16
+  - serializedVersion: 3
+    m_Name: P1_(A/Y)
+    descriptiveName: A pos / Y neg keymapping for axis controls
+    descriptiveNegativeName: 
+    negativeButton: joystick 1 button 3
+    positiveButton: joystick 1 button 0
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 10
+    dead: 0.2
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 27
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: P2_(A/Y)
+    descriptiveName: A pos / Y neg keymapping for axis controls
+    descriptiveNegativeName: 
+    negativeButton: joystick 2 button 3
+    positiveButton: joystick 2 button 0
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 10
+    dead: 0.2
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 27
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: P1_(Y/A)
+    descriptiveName: Y pos / A neg keymapping for axis controls
+    descriptiveNegativeName: 
+    negativeButton: joystick 1 button 0
+    positiveButton: joystick 1 button 3
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 10
+    dead: 0.2
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 27
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: P2_(Y/A)
+    descriptiveName: Y pos / A neg keymapping for axis controls
+    descriptiveNegativeName: 
+    negativeButton: joystick 2 button 0
+    positiveButton: joystick 2 button 3
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 10
+    dead: 0.2
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 27
+    joyNum: 2
+  - serializedVersion: 3
+    m_Name: P1_(B/X)
+    descriptiveName: B pos / X neg keymapping for axis controls
+    descriptiveNegativeName: 
+    negativeButton: joystick 1 button 2
+    positiveButton: joystick 1 button 1
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 10
+    dead: 0.2
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 27
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: P2_(B/X)
+    descriptiveName: B pos / X neg keymapping for axis controls
+    descriptiveNegativeName: 
+    negativeButton: joystick 2 button 2
+    positiveButton: joystick 2 button 1
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 10
+    dead: 0.2
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 27
+    joyNum: 2
+  - serializedVersion: 3
+    m_Name: P1_(X/B)
+    descriptiveName: X pos / B neg keymapping for axis controls
+    descriptiveNegativeName: 
+    negativeButton: joystick 1 button 1
+    positiveButton: joystick 1 button 2
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 10
+    dead: 0.2
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 27
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: P2_(X/B)
+    descriptiveName: X pos / B neg keymapping for axis controls
+    descriptiveNegativeName: 
+    negativeButton: joystick 2 button 1
+    positiveButton: joystick 2 button 2
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 10
+    dead: 0.2
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 27
+    joyNum: 2
+  - serializedVersion: 3
+    m_Name: P1_(LB/RB)
+    descriptiveName: LB pos / RB neg keymapping for axis controls
+    descriptiveNegativeName: 
+    negativeButton: joystick 1 button 5
+    positiveButton: joystick 1 button 4
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 10
+    dead: 0.2
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 27
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: P2_(LB/RB)
+    descriptiveName: LB pos / RB neg keymapping for axis controls
+    descriptiveNegativeName: 
+    negativeButton: joystick 2 button 5
+    positiveButton: joystick 2 button 4
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 10
+    dead: 0.2
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 27
+    joyNum: 2
+  - serializedVersion: 3
+    m_Name: P1_(RB/LB)
+    descriptiveName: RB pos / LB neg keymapping for axis controls
+    descriptiveNegativeName: 
+    negativeButton: joystick 1 button 4
+    positiveButton: joystick 1 button 5
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 10
+    dead: 0.2
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 27
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: P2_(RB/LB)
+    descriptiveName: RB pos / LB neg keymapping for axis controls
+    descriptiveNegativeName: 
+    negativeButton: joystick 2 button 4
+    positiveButton: joystick 2 button 5
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 10
+    dead: 0.2
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 27
+    joyNum: 2
