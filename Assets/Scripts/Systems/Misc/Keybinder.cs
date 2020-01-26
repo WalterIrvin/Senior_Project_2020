@@ -8,6 +8,10 @@ public class Keybinder : MonoBehaviour
 {
     private TextMeshProUGUI m_textRef;
     private IEnumerator m_coroutine;
+    public static int m_YawInv = -1;
+    public static int m_RollInv = -1;
+    public static int m_PitchInv = 1;
+    public static int m_ThrustInv = 1;
     //Current bindings for all controls
     //First is what input axis we are looking for, and the second parameter is the axis we are actually looking at
     //It allows Pitch to be determined by the "Yaw" controls for example, saving on having to physically edit keybindings
@@ -59,38 +63,71 @@ public class Keybinder : MonoBehaviour
         {"joystick 2 button 5", "P2_(RB/LB)"}
     };
 
+    //Generic button mapping to input axis to unity, this allows it to be picked up by Input
+    private static Dictionary<string, string> m_buttonToAxis = new Dictionary<string, string>()
+    {
+        {"joystick 1 button 0", "P1_A"},
+        {"joystick 2 button 0", "P2_A"},
+
+        {"joystick 1 button 1", "P1_B"},
+        {"joystick 2 button 1", "P2_B"},
+
+        {"joystick 1 button 2", "P1_X"},
+        {"joystick 2 button 2", "P2_X"},
+
+        {"joystick 1 button 3", "P1_Y"},
+        {"joystick 2 button 3", "P2_Y"},
+
+        {"joystick 1 button 4", "P1_LB"},
+        {"joystick 2 button 4", "P2_LB"},
+
+        {"joystick 1 button 5", "P1_RB"},
+        {"joystick 2 button 5", "P2_RB"},
+
+        {"joystick 1 button 6", "P1_Back"},
+        {"joystick 2 button 6", "P2_Back"},
+
+        {"joystick 1 button 7", "P1_Start"},
+        {"joystick 2 button 7", "P2_Start"},
+
+        {"joystick 1 button 8", "P1_LStick"},
+        {"joystick 2 button 8", "P2_LStick"},
+
+        {"joystick 1 button 9", "P1_RStick"},
+        {"joystick 2 button 9", "P2_RStick"}
+    };
     //Translate raw keybindings into more human-like text
     private static Dictionary<string, string> m_localizer = new Dictionary<string, string>()
     {
-        {"joystick 1 button 0", "A button"},
-        {"joystick 2 button 0", "A button"},
+        {"P1_A", "A button"},
+        {"P2_A", "A button"},
 
-        {"joystick 1 button 1", "B button"},
-        {"joystick 2 button 1", "B button"},
+        {"P1_B", "B button"},
+        {"P2_B", "B button"},
 
-        {"joystick 1 button 2", "X button"},
-        {"joystick 2 button 2", "X button"},
+        {"P1_X", "X button"},
+        {"P2_X", "X button"},
 
-        {"joystick 1 button 3", "Y button"},
-        {"joystick 2 button 3", "Y button"},
+        {"P1_Y", "Y button"},
+        {"P2_Y", "Y button"},
 
-        {"joystick 1 button 4", "LB button"},
-        {"joystick 2 button 4", "LB button"},
+        {"P1_LB", "LB button"},
+        {"P2_LB", "LB button"},
 
-        {"joystick 1 button 5", "RB button"},
-        {"joystick 2 button 5", "RB button"},
+        {"P1_RB", "RB button"},
+        {"P2_RB", "RB button"},
 
-        {"joystick 1 button 6", "Back button"},
-        {"joystick 2 button 6", "Back button"},
+        {"P1_Back", "Back button"},
+        {"P2_Back", "Back button"},
 
-        {"joystick 1 button 7", "Start button"},
-        {"joystick 2 button 7", "Start button"},
+        {"P1_Start", "Start button"},
+        {"P2_Start", "Start button"},
 
-        {"joystick 1 button 8", "L-Stick button"},
-        {"joystick 2 button 8", "L-Stick button"},
+        {"P1_LStick", "L-Stick button"},
+        {"P2_LStick", "L-Stick button"},
 
-        {"joystick 1 button 9", "R-Stick button"},
-        {"joystick 2 button 9", "R-Stick button"},
+        {"P1_RStick", "R-Stick button"},
+        {"P2_RStick", "R-Stick button"},
 
         {"P1_(A/Y)", "A/Y"},
         {"P2_(A/Y)", "A/Y"},
@@ -121,8 +158,15 @@ public class Keybinder : MonoBehaviour
         {"RY2_axis", "RY axis"},
 
         {"T1_axis", "T axis"},
-        {"T2_axis", "T axis"},
+        {"T2_axis", "T axis"}
     };
+    public List<TextMeshProUGUI> m_textList = new List<TextMeshProUGUI>();
+    public TextMeshProUGUI m_playerTextRef;
+    private void Update()
+    {
+        if(m_playerTextRef != null)
+            m_playerTextRef.SetText("Keybinding for P: " + BuildSubjectLogic.m_currentPlayerId);
+    }
     private void AxisButtonSetter(string inputFound, string fullBinding)
     {
         //If player attempts to set an axis bind to a key, will select the input they push as positive, with the reverse button as negative
@@ -157,7 +201,8 @@ public class Keybinder : MonoBehaviour
                 }
                 else
                 {
-                    FinishBinding("joystick " + pid + " button 0", fullBinding);
+                    string inputAxis = m_buttonToAxis["joystick " + pid + " button 0"];
+                    FinishBinding(inputAxis, fullBinding);
                 }
                 done = true;
             }
@@ -170,7 +215,8 @@ public class Keybinder : MonoBehaviour
                 }
                 else
                 {
-                    FinishBinding("joystick " + pid + " button 1", fullBinding);
+                    string inputAxis = m_buttonToAxis["joystick " + pid + " button 1"];
+                    FinishBinding(inputAxis, fullBinding);
                 }
                 done = true;
             }
@@ -183,7 +229,8 @@ public class Keybinder : MonoBehaviour
                 }
                 else
                 {
-                    FinishBinding("joystick " + pid + " button 2", fullBinding);
+                    string inputAxis = m_buttonToAxis["joystick " + pid + " button 2"];
+                    FinishBinding(inputAxis, fullBinding);
                 }
                 done = true;
             }
@@ -196,7 +243,8 @@ public class Keybinder : MonoBehaviour
                 }
                 else
                 {
-                    FinishBinding("joystick " + pid + " button 3", fullBinding);
+                    string inputAxis = m_buttonToAxis["joystick " + pid + " button 3"];
+                    FinishBinding(inputAxis, fullBinding);
                 }
                 done = true;
             }
@@ -209,7 +257,8 @@ public class Keybinder : MonoBehaviour
                 }
                 else
                 {
-                    FinishBinding("joystick " + pid + " button 4", fullBinding);
+                    string inputAxis = m_buttonToAxis["joystick " + pid + " button 4"];
+                    FinishBinding(inputAxis, fullBinding);
                 }
                 done = true;
             }
@@ -222,7 +271,8 @@ public class Keybinder : MonoBehaviour
                 }
                 else
                 {
-                    FinishBinding("joystick " + pid + " button 5", fullBinding);
+                    string inputAxis = m_buttonToAxis["joystick " + pid + " button 5"];
+                    FinishBinding(inputAxis, fullBinding);
                 }
                 done = true;
             }
@@ -231,22 +281,26 @@ public class Keybinder : MonoBehaviour
             {
                 if (Input.GetKeyDown("joystick " + pid + " button 6"))
                 {
-                    FinishBinding("joystick " + pid + " button 6", fullBinding);
+                    string inputAxis = m_buttonToAxis["joystick " + pid + " button 6"];
+                    FinishBinding(inputAxis, fullBinding);
                     done = true;
                 }
                 if (Input.GetKeyDown("joystick " + pid + " button 7"))
                 {
-                    FinishBinding("joystick " + pid + " button 7", fullBinding);
+                    string inputAxis = m_buttonToAxis["joystick " + pid + " button 7"];
+                    FinishBinding(inputAxis, fullBinding);
                     done = true;
                 }
                 if (Input.GetKeyDown("joystick " + pid + " button 8"))
                 {
-                    FinishBinding("joystick " + pid + " button 8", fullBinding);
+                    string inputAxis = m_buttonToAxis["joystick " + pid + " button 8"];
+                    FinishBinding(inputAxis, fullBinding);
                     done = true;
                 }
                 if (Input.GetKeyDown("joystick " + pid + " button 9"))
                 {
-                    FinishBinding("joystick " + pid + " button 9", fullBinding);
+                    string inputAxis = m_buttonToAxis["joystick " + pid + " button 9"];
+                    FinishBinding(inputAxis, fullBinding);
                     done = true;
                 }
             }
@@ -282,6 +336,14 @@ public class Keybinder : MonoBehaviour
             yield return null;
         }
         EventSystemInputManager.ToggleInput();
+    }
+    public void ResetDefaultText()
+    {
+        //Resets all attached text meshes to default text
+        foreach (TextMeshProUGUI textRef in m_textList)
+        {
+            textRef.SetText("<Default>");
+        }
     }
     public void SetTextRef(TextMeshProUGUI textRef)
     {

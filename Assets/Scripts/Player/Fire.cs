@@ -82,13 +82,13 @@ public class Fire : MonoBehaviour
         switch (m_weaponType)
         {
             case WeaponType.PLASMA:
-                m_fireAxis = Input.GetAxis("P" + joynum + "_PrimaryFire");
+                m_fireAxis = Input.GetAxis(Keybinder.m_axisDictionary["P" + joynum + "_PrimaryFire"]);
                 break;
             case WeaponType.ROCKET:
-                m_fireAxis = Input.GetAxis("P" + joynum + "_SecondaryFire");
+                m_fireAxis = Input.GetAxis(Keybinder.m_axisDictionary["P" + joynum + "_SecondaryFire"]);
                 break;
             case WeaponType.RAIL:
-                m_fireAxis = Input.GetAxis("P" + joynum + "_SecondaryFire");
+                m_fireAxis = Input.GetAxis(Keybinder.m_axisDictionary["P" + joynum + "_SecondaryFire"]);
                 break;
             default:
                 break;

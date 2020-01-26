@@ -39,10 +39,10 @@ public class Movement : MonoBehaviour
     private void GetInput()
     {
         //Input grabber for the spaceship
-        m_axis_yaw = Input.GetAxis("P" + m_joy_num + "_Yaw");
-        m_axis_pitch = Input.GetAxis("P" + m_joy_num + "_Pitch");
-        m_axis_roll = Input.GetAxis("P" + m_joy_num + "_Roll");
-        m_axis_thrust = Input.GetAxis("P" + m_joy_num + "_Thrust");
+        m_axis_yaw = Input.GetAxis(Keybinder.m_axisDictionary["P" + m_joy_num + "_Yaw"]);
+        m_axis_pitch = Input.GetAxis(Keybinder.m_axisDictionary["P" + m_joy_num + "_Pitch"]);
+        m_axis_roll = Input.GetAxis(Keybinder.m_axisDictionary["P" + m_joy_num + "_Roll"]);
+        m_axis_thrust = Input.GetAxis(Keybinder.m_axisDictionary["P" + m_joy_num + "_Thrust"]);
     }
 
     private void MovementUpdate()
