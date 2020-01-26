@@ -8,10 +8,18 @@ public class Keybinder : MonoBehaviour
 {
     private TextMeshProUGUI m_textRef;
     private IEnumerator m_coroutine;
-    public static int m_YawInv = -1;
-    public static int m_RollInv = -1;
-    public static int m_PitchInv = 1;
-    public static int m_ThrustInv = 1;
+    public static int m_P1_YawInv = -1;
+    public static int m_P2_YawInv = -1;
+
+    public static int m_P1_RollInv = -1;
+    public static int m_P2_RollInv = -1;
+
+    public static int m_P1_PitchInv = 1;
+    public static int m_P2_PitchInv = 1;
+
+    public static int m_P1_ThrustInv = 1;
+    public static int m_P2_ThrustInv = 1;
+
     //Current bindings for all controls
     //First is what input axis we are looking for, and the second parameter is the axis we are actually looking at
     //It allows Pitch to be determined by the "Yaw" controls for example, saving on having to physically edit keybindings
@@ -162,6 +170,56 @@ public class Keybinder : MonoBehaviour
     };
     public List<TextMeshProUGUI> m_textList = new List<TextMeshProUGUI>();
     public TextMeshProUGUI m_playerTextRef;
+    private int Inversion(int value)
+    {
+        if (value == 1)
+            return -1;
+        else
+            return 1;
+    }
+    public void SetInversion(string axis)
+    {
+        if(BuildSubjectLogic.m_currentPlayerId == 1)
+        {
+            switch (axis)
+            {
+                case "_Pitch":
+                    m_P1_PitchInv = Inversion(m_P1_PitchInv);
+                    break;
+                case "_Yaw":
+                    m_P1_YawInv = Inversion(m_P1_YawInv);
+                    break;
+                case "_Roll":
+                    m_P1_RollInv = Inversion(m_P1_RollInv);
+                    break;
+                case "_Thrust":
+                    m_P1_ThrustInv = Inversion(m_P1_ThrustInv);
+                    break;
+                default:
+                    break;
+            }
+        }
+        else if (BuildSubjectLogic.m_currentPlayerId == 2)
+        {
+            switch (axis)
+            {
+                case "_Pitch":
+                    m_P2_PitchInv = Inversion(m_P2_PitchInv);
+                    break;
+                case "_Yaw":
+                    m_P2_YawInv = Inversion(m_P2_YawInv);
+                    break;
+                case "_Roll":
+                    m_P2_RollInv = Inversion(m_P2_RollInv);
+                    break;
+                case "_Thrust":
+                    m_P2_ThrustInv = Inversion(m_P2_ThrustInv);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
     private void Update()
     {
         if(m_playerTextRef != null)

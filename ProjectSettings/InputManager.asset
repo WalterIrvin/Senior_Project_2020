@@ -49,7 +49,7 @@ InputManager:
     dead: 0.2
     sensitivity: 1
     snap: 1
-    invert: 1
+    invert: 0
     type: 2
     axis: 0
     joyNum: 1
@@ -65,7 +65,7 @@ InputManager:
     dead: 0.2
     sensitivity: 1
     snap: 1
-    invert: 1
+    invert: 0
     type: 2
     axis: 0
     joyNum: 2
@@ -113,23 +113,7 @@ InputManager:
     dead: 0.2
     sensitivity: 1
     snap: 0
-    invert: 0
-    type: 0
-    axis: 3
-    joyNum: 1
-  - serializedVersion: 3
-    m_Name: P1_Yaw
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: joystick 1 button 4
-    positiveButton: joystick 1 button 5
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 10
-    dead: 0.2
-    sensitivity: 1
-    snap: 0
-    invert: 0
+    invert: 1
     type: 2
     axis: 3
     joyNum: 1
@@ -145,23 +129,7 @@ InputManager:
     dead: 0.2
     sensitivity: 1
     snap: 0
-    invert: 0
-    type: 0
-    axis: 3
-    joyNum: 2
-  - serializedVersion: 3
-    m_Name: P2_Yaw
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: joystick 2 button 4
-    positiveButton: joystick 2 button 5
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 10
-    dead: 0.2
-    sensitivity: 1
-    snap: 0
-    invert: 0
+    invert: 1
     type: 2
     axis: 3
     joyNum: 2

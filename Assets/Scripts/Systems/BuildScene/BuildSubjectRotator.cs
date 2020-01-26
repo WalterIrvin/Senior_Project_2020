@@ -12,9 +12,28 @@ public class BuildSubjectRotator : MonoBehaviour
     private float m_base_turn_rate = 100;
     private void GetInput()
     {
-        m_axis_yaw = Input.GetAxis("P" + BuildSubjectLogic.m_currentPlayerId + "_Yaw");
-        m_axis_pitch = Input.GetAxis("P" + BuildSubjectLogic.m_currentPlayerId + "_Pitch");
-        m_axis_roll = Input.GetAxis("P" + BuildSubjectLogic.m_currentPlayerId + "_Roll");
+        int pitchInv = 1;
+        int yawInv = 1;
+        int rollInv = 1;
+        int thrustInv = 1;
+        if (BuildSubjectLogic.m_currentPlayerId == 1)
+        {
+            pitchInv = Keybinder.m_P1_PitchInv;
+            yawInv = Keybinder.m_P1_YawInv;
+            rollInv = Keybinder.m_P1_RollInv;
+            thrustInv = Keybinder.m_P1_ThrustInv;
+        }
+        else if (BuildSubjectLogic.m_currentPlayerId == 2)
+        {
+            pitchInv = Keybinder.m_P2_PitchInv;
+            yawInv = Keybinder.m_P2_YawInv;
+            rollInv = Keybinder.m_P2_RollInv;
+            thrustInv = Keybinder.m_P2_ThrustInv;
+        }
+        //Input grabber for the spaceship
+        m_axis_yaw = Input.GetAxis(Keybinder.m_axisDictionary["P" + BuildSubjectLogic.m_currentPlayerId + "_Yaw"]) * yawInv;
+        m_axis_pitch = Input.GetAxis(Keybinder.m_axisDictionary["P" + BuildSubjectLogic.m_currentPlayerId + "_Pitch"]) * pitchInv;
+        m_axis_roll = Input.GetAxis(Keybinder.m_axisDictionary["P" + BuildSubjectLogic.m_currentPlayerId + "_Roll"]) * rollInv;
     }
     private void RotationUpdate()
     {

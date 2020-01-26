@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
     private float m_cur_roll_rate = 0;
     private float m_cur_yaw_rate = 0;
     private float m_max_turning_rate = 175; // max turning rate accel
-    private float m_turning_accel = 57.69f; // amt to add per deltaTime
+    private float m_turning_accel = 97.69f; // amt to add per deltaTime
     private float m_angle_friction = 9.7f; // turning friction
     //Movement accel vars
     private float m_acceleration_rate = 7000; // rate at which to increase acceleration to max 
@@ -38,11 +38,29 @@ public class Movement : MonoBehaviour
     }
     private void GetInput()
     {
+        int pitchInv = 1;
+        int yawInv = 1;
+        int rollInv = 1;
+        int thrustInv = 1;
+        if (m_joy_num == 1)
+        {
+            pitchInv = Keybinder.m_P1_PitchInv;
+            yawInv = Keybinder.m_P1_YawInv;
+            rollInv = Keybinder.m_P1_RollInv;
+            thrustInv = Keybinder.m_P1_ThrustInv;
+        }
+        else if (m_joy_num == 2)
+        {
+            pitchInv = Keybinder.m_P2_PitchInv;
+            yawInv = Keybinder.m_P2_YawInv;
+            rollInv = Keybinder.m_P2_RollInv;
+            thrustInv = Keybinder.m_P2_ThrustInv;
+        }
         //Input grabber for the spaceship
-        m_axis_yaw = Input.GetAxis(Keybinder.m_axisDictionary["P" + m_joy_num + "_Yaw"]);
-        m_axis_pitch = Input.GetAxis(Keybinder.m_axisDictionary["P" + m_joy_num + "_Pitch"]);
-        m_axis_roll = Input.GetAxis(Keybinder.m_axisDictionary["P" + m_joy_num + "_Roll"]);
-        m_axis_thrust = Input.GetAxis(Keybinder.m_axisDictionary["P" + m_joy_num + "_Thrust"]);
+        m_axis_yaw = Input.GetAxis(Keybinder.m_axisDictionary["P" + m_joy_num + "_Yaw"]) * yawInv;
+        m_axis_pitch = Input.GetAxis(Keybinder.m_axisDictionary["P" + m_joy_num + "_Pitch"]) * pitchInv;
+        m_axis_roll = Input.GetAxis(Keybinder.m_axisDictionary["P" + m_joy_num + "_Roll"]) * rollInv;
+        m_axis_thrust = Input.GetAxis(Keybinder.m_axisDictionary["P" + m_joy_num + "_Thrust"]) * thrustInv;
     }
 
     private void MovementUpdate()

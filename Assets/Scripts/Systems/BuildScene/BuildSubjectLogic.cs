@@ -100,8 +100,9 @@ public class BuildSubjectLogic : MonoBehaviour
         string finalName = m_textRef.text;
         PlayerInfo newPlayer = new PlayerInfo(m_currentPlayerId, finalName, m_placedWeapons);
         AllPlayerInfo.Add(newPlayer);
-        if (m_currentPlayerId < Input.GetJoystickNames().Length)
+        if (m_currentPlayerId < Input.GetJoystickNames().Length && m_currentPlayerId < 2)
         {
+            //Allows to build up to 2 ships, game is hard capped at 2 joysticks though.
             m_currentPlayerId++;
             m_inputManager.UpdateInputManager();
             ResetSlots();
