@@ -13,9 +13,9 @@ public class Movement : MonoBehaviour
     private float m_cur_pitch_rate = 0;
     private float m_cur_roll_rate = 0;
     private float m_cur_yaw_rate = 0;
-    private float m_max_turning_rate = 175; // max turning rate accel
-    private float m_turning_accel = 97.69f; // amt to add per deltaTime
-    private float m_angle_friction = 9.7f; // turning friction
+    private float m_max_turning_rate = 305; // max turning rate accel
+    private float m_turning_accel = 297.69f; // amt to add per deltaTime
+    private float m_angle_friction = 19.7f; // turning friction
     //Movement accel vars
     private float m_acceleration_rate = 7000; // rate at which to increase acceleration to max 
     private float m_max_vel = 15000;
@@ -120,7 +120,7 @@ public class Movement : MonoBehaviour
             {
                 cur_angle_rate = -angleVal;
             }
-            if (Mathf.Abs(cur_angle_rate) <= 50)
+            if (Mathf.Abs(cur_angle_rate) <= 70)
             {
                 cur_angle_rate = 0;
             }
