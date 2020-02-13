@@ -16,14 +16,28 @@ public class SlotPicker : MonoBehaviour
     public Material m_unselectedWeaponMat;
     public GameObject m_BuildSubjectRef;
     private List<GameObject> m_weaponSlots;
+    private List<string> m_weaponNames = new List<string>();
     private void Start()
     {
         m_weaponSlots = m_BuildSubjectRef.GetComponent<BuildSubjectLogic>().GetWeaponSlots();
         SetCurrentSlot(0);
+        for (int i = 0; i < m_weaponSlots.Count; i++)
+        {
+            m_weaponNames.Add("None");
+        }
     }
-    public void AddWeapon(GameObject prefab)
+    public string GetCurrentWeapon()
+    {
+        return m_weaponNames[m_currentWeaponSlot];
+    }
+    public void RemoveWeapon()
+    {
+        m_weaponNames[m_currentWeaponSlot] = "None";
+    }
+    public void AddWeapon(GameObject prefab, string name)
     {
         Mesh prefabMesh = prefab.GetComponent<MeshFilter>().sharedMesh;
+        m_weaponNames[m_currentWeaponSlot] = name;
         m_weaponSlots[m_currentWeaponSlot].GetComponent<MeshFilter>().sharedMesh = prefabMesh;
         m_BuildSubjectRef.GetComponent<BuildSubjectLogic>().AddWeapon(m_currentWeaponSlot, prefab);
     }

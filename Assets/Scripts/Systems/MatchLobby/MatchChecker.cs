@@ -17,7 +17,7 @@ public class MatchChecker : MonoBehaviour
     public TextMeshProUGUI m_spawnDelayRef;
     public TextMeshProUGUI m_bestOutOfRef;
     public static string MatchMap = "Station";
-    public static int MatchBudget = 20;
+    public static int MatchBudget = 200;
     public static int MatchTimer = 45;
     public static int MatchSpawnDelay = 3;
     public static int MatchBestOf = 4;
@@ -35,6 +35,7 @@ public class MatchChecker : MonoBehaviour
                 if (budget >= 20 && timer > 0 && spawnDelay >= 0 && bestOf > 0)
                 {
                     //Budget needs to be enough to buy at least one weapon, timer needs to be at least > 0, and spawndelay can be instant or longer.
+
                     MatchMap = m_mapNameRef.text;
                     MatchBudget = budget;
                     MatchTimer = timer;

@@ -2208,9 +2208,88 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1651008234251530938, guid: 959d29a913b158a48bafb4c37c7f8e18,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651008234251530938, guid: 959d29a913b158a48bafb4c37c7f8e18,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651008234251530938, guid: 959d29a913b158a48bafb4c37c7f8e18,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651008234251530938, guid: 959d29a913b158a48bafb4c37c7f8e18,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651008234251530938, guid: 959d29a913b158a48bafb4c37c7f8e18,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899359472557086950, guid: 959d29a913b158a48bafb4c37c7f8e18,
+        type: 3}
+      propertyPath: m_buildRef
+      value: 
+      objectReference: {fileID: 1887182020}
+    - target: {fileID: 2899359472557086950, guid: 959d29a913b158a48bafb4c37c7f8e18,
+        type: 3}
+      propertyPath: m_placeCost
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899359472557086950, guid: 959d29a913b158a48bafb4c37c7f8e18,
+        type: 3}
+      propertyPath: m_name
+      value: Plasma Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201351913365945829, guid: 959d29a913b158a48bafb4c37c7f8e18,
+        type: 3}
+      propertyPath: m_buildRef
+      value: 
+      objectReference: {fileID: 1887182020}
+    - target: {fileID: 8201351913365945829, guid: 959d29a913b158a48bafb4c37c7f8e18,
+        type: 3}
+      propertyPath: m_placeCost
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201351913365945829, guid: 959d29a913b158a48bafb4c37c7f8e18,
+        type: 3}
+      propertyPath: m_name
+      value: Missile Launcher
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6439739797900832747, guid: 959d29a913b158a48bafb4c37c7f8e18, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 959d29a913b158a48bafb4c37c7f8e18, type: 3}
+--- !u!114 &397837513 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1651008234251530938, guid: 959d29a913b158a48bafb4c37c7f8e18,
+    type: 3}
+  m_PrefabInstance: {fileID: 397837512}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &466682793 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6057427155494452182, guid: 959d29a913b158a48bafb4c37c7f8e18,
+    type: 3}
+  m_PrefabInstance: {fileID: 397837512}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9602dc1f0d2949046aeb0bbc903df382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &600092656 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8861319408680008352, guid: 959d29a913b158a48bafb4c37c7f8e18,
@@ -3380,6 +3459,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7865395691465153100, guid: e8a326ce79a4ab143a5b9f71e72c62ac,
         type: 3}
+      propertyPath: m_placedWeapons.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7865395691465153100, guid: e8a326ce79a4ab143a5b9f71e72c62ac,
+        type: 3}
+      propertyPath: m_WeaponPlacerInfo.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7865395691465153100, guid: e8a326ce79a4ab143a5b9f71e72c62ac,
+        type: 3}
       propertyPath: m_textRef
       value: 
       objectReference: {fileID: 2002431536}
@@ -3393,6 +3482,36 @@ PrefabInstance:
       propertyPath: m_defaultMesh
       value: 
       objectReference: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 7865395691465153100, guid: e8a326ce79a4ab143a5b9f71e72c62ac,
+        type: 3}
+      propertyPath: m_BuildCostTxt
+      value: 
+      objectReference: {fileID: 397837513}
+    - target: {fileID: 7865395691465153100, guid: e8a326ce79a4ab143a5b9f71e72c62ac,
+        type: 3}
+      propertyPath: m_WeaponPlacerInfo.Array.data[0].m_name
+      value: Plasma Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 7865395691465153100, guid: e8a326ce79a4ab143a5b9f71e72c62ac,
+        type: 3}
+      propertyPath: m_WeaponPlacerInfo.Array.data[0].m_cost
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7865395691465153100, guid: e8a326ce79a4ab143a5b9f71e72c62ac,
+        type: 3}
+      propertyPath: m_WeaponPlacerInfo.Array.data[1].m_name
+      value: Missile Launcher
+      objectReference: {fileID: 0}
+    - target: {fileID: 7865395691465153100, guid: e8a326ce79a4ab143a5b9f71e72c62ac,
+        type: 3}
+      propertyPath: m_WeaponPlacerInfo.Array.data[1].m_cost
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7865395691465153100, guid: e8a326ce79a4ab143a5b9f71e72c62ac,
+        type: 3}
+      propertyPath: m_pickerRef
+      value: 
+      objectReference: {fileID: 466682793}
     - target: {fileID: 3500294689620872648, guid: e8a326ce79a4ab143a5b9f71e72c62ac,
         type: 3}
       propertyPath: m_LocalPosition.x

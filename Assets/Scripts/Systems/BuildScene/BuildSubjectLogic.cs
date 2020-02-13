@@ -4,6 +4,12 @@ using UnityEngine;
 using TMPro;
 using System;
 using UnityEngine.EventSystems;
+[System.Serializable]
+public class WeaponPlacerInfo
+{
+    public string m_name;
+    public int m_cost;
+}
 
 [System.Serializable]
 public class WeaponryInfo
@@ -45,13 +51,18 @@ public class BuildSubjectLogic : MonoBehaviour
     /// </summary>
     private EventSystemInputManager m_inputManager;
     public Mesh m_defaultMesh;
+    public SlotPicker m_pickerRef;
+    public List<WeaponPlacerInfo> m_WeaponPlacerInfo = new List<WeaponPlacerInfo>();
     public static int m_currentPlayerId = 1; //The current ID to use for the player, is the same as joystick number.
+    public static int m_curBuildCost = 0;
+    public TextMeshProUGUI m_BuildCostTxt;
     public TextMeshProUGUI m_textRef;
     public List<GameObject> m_weaponSlots = new List<GameObject>();
     public List<WeaponryInfo> m_placedWeapons = new List<WeaponryInfo>();
     public static List<PlayerInfo> AllPlayerInfo = new List<PlayerInfo>(); // the static list holding all players build info
     private void Start()
     {
+        UpdateBuildText();
         try
         {
             m_inputManager = EventSystem.current.gameObject.GetComponent<EventSystemInputManager>();
@@ -88,11 +99,46 @@ public class BuildSubjectLogic : MonoBehaviour
     private void ResetSlots()
     {
         //Clears out placed weapons and resets the mesh shown.
+        m_curBuildCost = 0;
+        UpdateBuildText();
         m_placedWeapons = new List<WeaponryInfo>();
         foreach(GameObject obj in m_weaponSlots)
         {
             obj.GetComponent<MeshFilter>().sharedMesh = m_defaultMesh;
         }
+    }
+    public bool IsWeaponHere()
+    {
+        return true;
+    }
+    public int GetWeaponCost(string name)
+    {
+        foreach (WeaponPlacerInfo info in m_WeaponPlacerInfo)
+        {
+            if (info.m_name == name)
+            {
+                return info.m_cost;
+            }
+        }
+        return 0;
+    }
+    public void RemoveLastWeapon()
+    {
+        string name = m_pickerRef.GetCurrentWeapon();
+        foreach (WeaponPlacerInfo info in m_WeaponPlacerInfo)
+        {
+            if (info.m_name == name)
+            {
+                m_curBuildCost -= info.m_cost;
+                m_pickerRef.RemoveWeapon();
+                return;
+            }
+        }
+    }
+    public void UpdateBuildText()
+    {
+        string data = m_curBuildCost + " / " + MatchChecker.MatchBudget;
+        m_BuildCostTxt.SetText(data);
     }
     public void FinalizeBuild()
     {
@@ -100,6 +146,7 @@ public class BuildSubjectLogic : MonoBehaviour
         string finalName = m_textRef.text;
         PlayerInfo newPlayer = new PlayerInfo(m_currentPlayerId, finalName, m_placedWeapons);
         AllPlayerInfo.Add(newPlayer);
+        UpdateBuildText();
         if (m_currentPlayerId < Input.GetJoystickNames().Length && m_currentPlayerId < 2)
         {
             //Allows to build up to 2 ships, game is hard capped at 2 joysticks though.
@@ -110,6 +157,7 @@ public class BuildSubjectLogic : MonoBehaviour
         else
         {
             //If all players have built, switch scene to the main game.
+            m_curBuildCost = 0;
             m_currentPlayerId = 1;
             this.gameObject.GetComponent<LevelSwitcher>().SetLevel(MatchChecker.MatchMap);
         }
