@@ -30,6 +30,13 @@ public class SlotPicker : MonoBehaviour
     {
         return m_weaponNames[m_currentWeaponSlot];
     }
+    public void resetWeapon()
+    {
+        for (int i = 0; i < m_weaponNames.Count; i++)
+        {
+            m_weaponNames[i] = "None";
+        }
+    }
     public void RemoveWeapon()
     {
         m_weaponNames[m_currentWeaponSlot] = "None";

@@ -99,6 +99,7 @@ public class BuildSubjectLogic : MonoBehaviour
     private void ResetSlots()
     {
         //Clears out placed weapons and resets the mesh shown.
+        m_pickerRef.resetWeapon();
         m_curBuildCost = 0;
         UpdateBuildText();
         m_placedWeapons = new List<WeaponryInfo>();
@@ -109,7 +110,9 @@ public class BuildSubjectLogic : MonoBehaviour
     }
     public bool IsWeaponHere()
     {
-        return true;
+        string name = m_pickerRef.GetCurrentWeapon();
+        Debug.Log(name);
+        return name != "None";
     }
     public int GetWeaponCost(string name)
     {
