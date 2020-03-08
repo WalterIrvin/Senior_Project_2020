@@ -8,7 +8,13 @@ public class Movement : MonoBehaviour
     public Rigidbody m_body;
     public Player m_player_ref;
     public Image m_fillBar;
-
+    public List<ParticleSystem> m_thrusterPlumes;
+    private ParticleSystem.MainModule m_tlplume;  //This is beyond annoying, but the way start speed works means these variables must be class level
+    private ParticleSystem.MainModule m_trplume;  //They don't take effect from the looks of it when unless they are pre-declared
+    private ParticleSystem.MainModule m_blplume;
+    private ParticleSystem.MainModule m_brplume;
+    private ParticleSystem.MainModule m_midplume;
+    private float m_max_plume_len = 40; // Set this to however long the max size of plume should be
     //Turning accel vars
     private float m_cur_pitch_rate = 0;
     private float m_cur_roll_rate = 0;
@@ -27,7 +33,14 @@ public class Movement : MonoBehaviour
     private float m_axis_thrust = 0;
     private int m_joy_num = 1; //Change
     private bool m_colliding = false;
-
+    private void Start()
+    {
+        m_tlplume = m_thrusterPlumes[0].main;
+        m_trplume = m_thrusterPlumes[1].main;
+        m_blplume = m_thrusterPlumes[2].main;
+        m_brplume = m_thrusterPlumes[3].main;
+        m_midplume = m_thrusterPlumes[4].main;
+    }
     public void SetController(int num)
     {
         m_joy_num = num;
@@ -134,11 +147,22 @@ public class Movement : MonoBehaviour
     {
         m_colliding = false;
     }
+    private void UpdatePlumes(float vel)
+    {
+        float percentage = m_max_plume_len / m_max_vel; // scales the vel down so that it fits in the 0-8 range
+        float plume_len = vel * percentage;
+        m_tlplume.startSpeed = plume_len;
+        m_trplume.startSpeed = plume_len;
+        m_blplume.startSpeed = plume_len;
+        m_brplume.startSpeed = plume_len;
+        m_midplume.startSpeed = plume_len;
+    }
     public void FixedUpdate()
     {
         GetInput();
         MovementUpdate();
-        if(m_cur_vel < 0)
+        UpdatePlumes(m_cur_vel);
+        if (m_cur_vel < 0)
         {
             m_fillBar.color = new Color(1, 0, 0);
         }

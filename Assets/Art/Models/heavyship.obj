@@ -1,7 +1,7 @@
 # Blender v2.81 (sub 16) OBJ File: 'ship.blend'
 # www.blender.org
-mtllib HeavyFighter.mtl
-o HeavyFighter
+mtllib heavyship.mtl
+g HeavyFighter
 v 0.839925 -1.063636 -1.885696
 v 1.101788 -1.314557 1.845797
 v 0.834485 0.947488 -1.885696

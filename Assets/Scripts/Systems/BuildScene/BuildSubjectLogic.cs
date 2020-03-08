@@ -57,6 +57,7 @@ public class BuildSubjectLogic : MonoBehaviour
     public static int m_curBuildCost = 0;
     public TextMeshProUGUI m_BuildCostTxt;
     public TextMeshProUGUI m_textRef;
+    public TextMeshProUGUI m_defaultTextRef;
     public List<GameObject> m_weaponSlots = new List<GameObject>();
     public List<WeaponryInfo> m_placedWeapons = new List<WeaponryInfo>();
     public static List<PlayerInfo> AllPlayerInfo = new List<PlayerInfo>(); // the static list holding all players build info
@@ -111,7 +112,6 @@ public class BuildSubjectLogic : MonoBehaviour
     public bool IsWeaponHere()
     {
         string name = m_pickerRef.GetCurrentWeapon();
-        Debug.Log(name);
         return name != "None";
     }
     public int GetWeaponCost(string name)
@@ -147,6 +147,13 @@ public class BuildSubjectLogic : MonoBehaviour
     {
         //Once build is finished, pack up all data and store it into static list to be used during gameplay.
         string finalName = m_textRef.text;
+        if (finalName == "")
+        {
+            finalName = "Player" + m_currentPlayerId;
+        }
+        m_textRef.SetText("");
+        m_textRef.gameObject.SetActive(false);
+        m_defaultTextRef.gameObject.SetActive(true);
         PlayerInfo newPlayer = new PlayerInfo(m_currentPlayerId, finalName, m_placedWeapons);
         AllPlayerInfo.Add(newPlayer);
         UpdateBuildText();

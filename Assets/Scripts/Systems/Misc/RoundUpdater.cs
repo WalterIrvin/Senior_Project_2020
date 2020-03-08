@@ -82,6 +82,7 @@ public class RoundUpdater : MonoBehaviour
                 {
                     //If the difference between highest and second highest is equivalent to the minimum needed to win, the match ends.
                     winning_player = max_player.name;
+                    BuildSubjectLogic.AllPlayerInfo = new List<PlayerInfo>();
                     SceneManager.LoadScene("EndScreen");
                 }
             }

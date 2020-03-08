@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     public float m_damage = 15f;
     public float m_speed = 100f;
     public float m_angle_per_sec = 85f;
+    public ParticleSystem m_particleSys = null;
     private WeaponType m_weaponType;
     private GameObject m_coreRef;
     private GameObject m_parentRef;
@@ -17,6 +18,11 @@ public class Projectile : MonoBehaviour
     private Vector3 m_convergePoint;
     private Vector3 m_convergeForward;
     private bool m_willDieAfterSound = false; //Used to prevent annoying sound cutting on bullets
+    private AudioSource soundPlayer;
+    private void Start()
+    {
+        soundPlayer = this.gameObject.GetComponent<AudioSource>();
+    }
     public void Init(Fire fireScript, GameObject target=null)
     {
         ///Determines the type of the weapon based on what type the gun was, and also sets the gun to "parent" without being bound to its position/rotation
@@ -65,13 +71,24 @@ public class Projectile : MonoBehaviour
     }
     private void DelegateDeath()
     {
-        //Handles all death scenarios, makes sure sound finishes playing before destroying object
-        AudioSource soundPlayer = this.gameObject.GetComponent<AudioSource>();
-        if(soundPlayer.isPlaying)
+        if (m_particleSys != null)
         {
-            m_willDieAfterSound = true;
-            MeshRenderer mesh = this.gameObject.GetComponent<MeshRenderer>();
-            mesh.enabled = false;
+            m_particleSys.Stop(); // Stops the current running particle system
+        }
+        //Handles all death scenarios, makes sure sound finishes playing before destroying object
+        
+        if (soundPlayer != null)
+        {
+            if (soundPlayer.isPlaying)
+            {
+                m_willDieAfterSound = true;
+                MeshRenderer mesh = this.gameObject.GetComponent<MeshRenderer>();
+                mesh.enabled = false;
+            }
+            else
+            {
+                this.gameObject.SetActive(false);
+            }
         }
         else
         {
@@ -95,7 +112,6 @@ public class Projectile : MonoBehaviour
                 DelegateDeath();
             }
         }
-        Debug.Log(other.gameObject.tag);
         if (other.gameObject.tag == "Neutral")
         {
             DelegateDeath();
@@ -103,6 +119,15 @@ public class Projectile : MonoBehaviour
     }
     private void Update()
     {
+        if (soundPlayer != null)
+        {
+            if (!soundPlayer.isPlaying)
+            {
+                Destroy(this.gameObject.GetComponent<AudioSource>());
+                soundPlayer = null;
+                Debug.Log("done");
+            }
+        }
         m_lifeSpan -= Time.deltaTime;
         if (m_lifeSpan <= 0)
         {

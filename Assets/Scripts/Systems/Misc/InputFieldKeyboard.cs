@@ -14,6 +14,7 @@ public class InputFieldKeyboard : MonoBehaviour
     public GameObject m_keyboard;
     public GameObject m_firstKey;
     public TextMeshProUGUI m_textRef;
+    public TextMeshProUGUI m_defaultRef;
     public void OpenKeyboard()
     {
         if (EventSystem.current.alreadySelecting == false)

@@ -17,9 +17,9 @@ public class MatchChecker : MonoBehaviour
     public TextMeshProUGUI m_spawnDelayRef;
     public TextMeshProUGUI m_bestOutOfRef;
     public static string MatchMap = "Station";
-    public static int MatchBudget = 200;
-    public static int MatchTimer = 45;
-    public static int MatchSpawnDelay = 3;
+    public static int MatchBudget = 5000;
+    public static int MatchTimer = 15;
+    public static int MatchSpawnDelay = 5;
     public static int MatchBestOf = 4;
     private Button m_buttonRef;
     private bool CheckValid()

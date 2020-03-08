@@ -120,6 +120,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &35585909 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1974243663265205141, guid: 664ca7b0edc62f649a205d7148ec6308,
+    type: 3}
+  m_PrefabInstance: {fileID: 2121999526}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &126726314
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -869,6 +875,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6955923007079159650, guid: 8f58a17e1be4b5a459b06f81dac4d15f,
     type: 3}
   m_PrefabInstance: {fileID: 381686784}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &480728543 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1974243663265205141, guid: 664ca7b0edc62f649a205d7148ec6308,
+    type: 3}
+  m_PrefabInstance: {fileID: 1329904083}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &495798951
 PrefabInstance:
@@ -2346,8 +2358,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerRefs:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 35585909}
+  - {fileID: 480728543}
 --- !u!1001 &911883955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4043,6 +4055,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 1974243663265205141, guid: 664ca7b0edc62f649a205d7148ec6308,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7977630219931142209, guid: 664ca7b0edc62f649a205d7148ec6308,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4218,11 +4235,21 @@ PrefabInstance:
       propertyPath: m_NormalizedViewPortRect.x
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 536560927531861422, guid: 664ca7b0edc62f649a205d7148ec6308,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 5943
+      objectReference: {fileID: 0}
     - target: {fileID: 2091428671528505385, guid: 664ca7b0edc62f649a205d7148ec6308,
         type: 3}
       propertyPath: m_otherCores.Array.data[0]
       value: 
       objectReference: {fileID: 1984013883}
+    - target: {fileID: 8640010822666938373, guid: 664ca7b0edc62f649a205d7148ec6308,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 664ca7b0edc62f649a205d7148ec6308, type: 3}
 --- !u!4 &1329904084 stripped
@@ -4237,7 +4264,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1329904083}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 480728543}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e497881224ad992488b60aa552504448, type: 3}
@@ -6914,11 +6941,21 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 536560927531861422, guid: 664ca7b0edc62f649a205d7148ec6308,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 3895
+      objectReference: {fileID: 0}
     - target: {fileID: 2091428671528505385, guid: 664ca7b0edc62f649a205d7148ec6308,
         type: 3}
       propertyPath: m_otherCores.Array.data[0]
       value: 
       objectReference: {fileID: 1413761428}
+    - target: {fileID: 8640010822666938373, guid: 664ca7b0edc62f649a205d7148ec6308,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 664ca7b0edc62f649a205d7148ec6308, type: 3}
 --- !u!4 &2121999527 stripped
@@ -6933,7 +6970,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 2121999526}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 35585909}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e497881224ad992488b60aa552504448, type: 3}

@@ -17,16 +17,36 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI m_killCount;
     public TextMeshProUGUI m_winCount;
     public TextMeshProUGUI m_lossCount;
+    public AudioSource m_deathSound;
+    public ParticleSystem m_deathAnimation; // Death explosion
     private float m_curHealth;
     private int m_kills = 0;
     private int m_wins = 0;
     private int m_losses = 0;
     private float m_respawnTime = MatchChecker.MatchSpawnDelay;
     private float m_curRespawnTime = 0;
+    private float m_animationTimer = 1.5f; // time that explosion gets to animate
+    private bool m_alreadyDead = false;
     private void Start()
     {
         m_coreRef.GetComponent<Movement>().SetController(m_joystick);
         m_curHealth = m_maxHealth;
+    }
+    public void Update()
+    {
+        if (m_curHealth <= 0)
+        {
+            if (m_animationTimer > 0)
+            {
+                m_animationTimer -= Time.deltaTime;
+            }
+            else
+            {
+                m_animationTimer = 4f;
+                m_deathAnimation.Stop();
+                m_coreRef.SetActive(false);
+            }
+        }
     }
     public void Respawn()
     {
@@ -43,6 +63,7 @@ public class Player : MonoBehaviour
             if (m_curRespawnTime >= m_respawnTime)
             {
                 Respawn();
+                m_alreadyDead = false;
             }
         }
     }
@@ -50,10 +71,12 @@ public class Player : MonoBehaviour
     {
         ///Returns true if damage killed player
         m_curHealth -= damage;
-        if (m_curHealth <= 0)
+        if (m_curHealth <= 0 && !m_alreadyDead)
         {
             m_curHealth = 0;
-            m_coreRef.SetActive(false);
+            m_deathSound.Play();
+            m_deathAnimation.Play();
+            m_alreadyDead = true;
             return true;
         }
         return false;

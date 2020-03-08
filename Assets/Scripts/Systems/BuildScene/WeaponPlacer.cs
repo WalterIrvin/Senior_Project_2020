@@ -18,7 +18,6 @@ public class WeaponPlacer : MonoBehaviour
             if (BuildSubjectLogic.m_curBuildCost + cost <= x)
             {
                 BuildSubjectLogic.m_curBuildCost += cost;
-                Debug.Log(BuildSubjectLogic.m_curBuildCost);
                 m_SlotPicker.AddWeapon(prefab, m_name);
                 m_buildRef.UpdateBuildText();
             }

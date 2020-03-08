@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class WeaponMats
+{
+    public string name;
+    public Material mat;
+}
+
 public class SlotPicker : MonoBehaviour
 {
     /// <summary>
@@ -13,10 +20,12 @@ public class SlotPicker : MonoBehaviour
     /// </summary>
     public int m_currentWeaponSlot = 0;
     public Material m_selectedWeaponMat;
-    public Material m_unselectedWeaponMat;
+    public Material m_unknownMat;  // unselected mat for unknown weapons
+    public List<WeaponMats> m_unselectedMats;
     public GameObject m_BuildSubjectRef;
     private List<GameObject> m_weaponSlots;
     private List<string> m_weaponNames = new List<string>();
+    private string m_curName = "Robert"; // catch me lacking
     private void Start()
     {
         m_weaponSlots = m_BuildSubjectRef.GetComponent<BuildSubjectLogic>().GetWeaponSlots();
@@ -25,6 +34,7 @@ public class SlotPicker : MonoBehaviour
         {
             m_weaponNames.Add("None");
         }
+        m_curName = m_weaponNames[m_currentWeaponSlot];
     }
     public string GetCurrentWeapon()
     {
@@ -55,7 +65,24 @@ public class SlotPicker : MonoBehaviour
         {
             if (i != slot)
             {
-                m_weaponSlots[i].GetComponent<Renderer>().material = m_unselectedWeaponMat;
+                bool known = false;
+                if (i < m_weaponNames.Count)
+                {
+                    m_curName = m_weaponNames[i];
+                }
+                foreach (WeaponMats mat_dict in m_unselectedMats)
+                {
+                    if (m_curName == mat_dict.name)
+                    {
+                        m_weaponSlots[i].GetComponent<Renderer>().material = mat_dict.mat;
+                        known = true;
+                        break;
+                    }
+                }
+                if (!known)
+                {
+                    m_weaponSlots[i].GetComponent<Renderer>().material = m_unknownMat;
+                }
             }
             else if (i == slot)
             {
