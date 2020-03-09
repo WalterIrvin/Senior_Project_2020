@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     public Rigidbody m_body;
     public Player m_player_ref;
     public Image m_fillBar;
+    public AudioSource m_thrustSound; // plays when thrusting
     public List<ParticleSystem> m_thrusterPlumes;
     private ParticleSystem.MainModule m_tlplume;  //This is beyond annoying, but the way start speed works means these variables must be class level
     private ParticleSystem.MainModule m_trplume;  //They don't take effect from the looks of it when unless they are pre-declared
@@ -24,7 +25,7 @@ public class Movement : MonoBehaviour
     private float m_angle_friction = 19.7f; // turning friction
     //Movement accel vars
     private float m_acceleration_rate = 7000; // rate at which to increase acceleration to max 
-    private float m_max_vel = 15000;
+    private float m_max_vel = 30000;
     private float m_cur_vel = 0;
 
     private float m_axis_yaw = 0;
@@ -151,11 +152,24 @@ public class Movement : MonoBehaviour
     {
         float percentage = m_max_plume_len / m_max_vel; // scales the vel down so that it fits in the 0-8 range
         float plume_len = vel * percentage;
+        if (plume_len < 0)
+        {
+            plume_len = 0;
+            //m_thrustSound.Stop();
+        }
+            
         m_tlplume.startSpeed = plume_len;
         m_trplume.startSpeed = plume_len;
         m_blplume.startSpeed = plume_len;
         m_brplume.startSpeed = plume_len;
         m_midplume.startSpeed = plume_len;
+        if (plume_len > 0)
+        {
+            if (!m_thrustSound.isPlaying)
+            {
+                //m_thrustSound.Play();
+            }
+        }
     }
     public void FixedUpdate()
     {

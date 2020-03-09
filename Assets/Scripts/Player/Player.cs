@@ -43,6 +43,8 @@ public class Player : MonoBehaviour
             else
             {
                 m_animationTimer = 4f;
+                m_deathSound.Stop();
+                m_deathAnimation.Clear();
                 m_deathAnimation.Stop();
                 m_coreRef.SetActive(false);
             }

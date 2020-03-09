@@ -98,23 +98,26 @@ public class Projectile : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject != m_coreRef)
+        if (!m_willDieAfterSound)
         {
-            //If not colliding with the core ship
-            if (other.gameObject.tag == "Player")
+            if (other.gameObject != m_coreRef)
             {
-                Player otherPlayer = other.transform.parent.gameObject.GetComponent<Player>();
-                bool killResult = otherPlayer.DamagePlayer(m_damage);
-                if (killResult)
+                //If not colliding with the core ship
+                if (other.gameObject.tag == "Player")
                 {
-                    m_playerRef.AddKill();
+                    Player otherPlayer = other.transform.parent.gameObject.GetComponent<Player>();
+                    bool killResult = otherPlayer.DamagePlayer(m_damage);
+                    if (killResult)
+                    {
+                        m_playerRef.AddKill();
+                    }
+                    DelegateDeath();
                 }
+            }
+            if (other.gameObject.tag == "Neutral")
+            {
                 DelegateDeath();
             }
-        }
-        if (other.gameObject.tag == "Neutral")
-        {
-            DelegateDeath();
         }
     }
     private void Update()
@@ -125,7 +128,6 @@ public class Projectile : MonoBehaviour
             {
                 Destroy(this.gameObject.GetComponent<AudioSource>());
                 soundPlayer = null;
-                Debug.Log("done");
             }
         }
         m_lifeSpan -= Time.deltaTime;
