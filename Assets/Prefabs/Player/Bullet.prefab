@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2821860262349367628}
   - component: {fileID: 8862355197481519499}
   - component: {fileID: 91508849519524324}
-  - component: {fileID: 890438701260895479}
   - component: {fileID: 3637807783432693734}
   m_Layer: 8
   m_Name: Bullet
@@ -31,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2533463037712418927}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -112,23 +111,6 @@ MonoBehaviour:
   m_speed: 1400
   m_angle_per_sec: 0
   m_particleSys: {fileID: 0}
---- !u!114 &890438701260895479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2533463037712418927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 1a704ae1645aad6469a4a3d3b425121a, type: 2}
-  isGlobal: 1
-  blendDistance: 0
-  weight: 1
-  priority: 0
 --- !u!82 &3637807783432693734
 AudioSource:
   m_ObjectHideFlags: 0
