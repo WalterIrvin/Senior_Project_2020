@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2091428671528505385}
   - component: {fileID: 4678863973260264394}
   - component: {fileID: 8956498663983721994}
-  - component: {fileID: 1290176518672446390}
+  - component: {fileID: 385592853749377255}
   m_Layer: 2
   m_Name: Camera
   m_TagString: Untagged
@@ -170,22 +170,14 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
---- !u!123 &1290176518672446390
-LensFlare:
+--- !u!124 &385592853749377255
+Behaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 86635941407671501}
   m_Enabled: 1
-  m_Flare: {fileID: 12100000, guid: 05de1b30c16f36d479c2beca4a8567b7, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_Brightness: 1
-  m_FadeSpeed: 3
-  m_IgnoreLayers:
-    serializedVersion: 2
-    m_Bits: 6
-  m_Directional: 1
 --- !u!1 &291050040375701708
 GameObject:
   m_ObjectHideFlags: 0
