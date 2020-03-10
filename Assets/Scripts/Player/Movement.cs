@@ -161,10 +161,10 @@ public class Movement : MonoBehaviour
     {
         float percentage = m_max_plume_len / m_max_vel; // scales the vel down so that it fits in the 0-8 range
         float plume_len = m_cur_vel * percentage;
-        if (plume_len < 0)
+        if (plume_len <= 0)
         {
             plume_len = 0;
-            //m_thrustSound.Stop();
+            m_thrustSound.Stop();
         }
             
         m_tlplume.startSpeed = plume_len;
@@ -176,9 +176,10 @@ public class Movement : MonoBehaviour
         {
             if (!m_thrustSound.isPlaying)
             {
-                //m_thrustSound.Play();
+                m_thrustSound.Play();
             }
         }
+        m_thrustSound.volume = (plume_len / m_max_plume_len) / 4;
     }
     private void UpdateHyperspace()
     {
