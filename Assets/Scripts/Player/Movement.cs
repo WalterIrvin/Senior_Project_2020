@@ -192,16 +192,15 @@ public class Movement : MonoBehaviour
         {
             //If ship is going backwards, play the reverse particle system
             cur_velocity = Mathf.Abs(cur_velocity);
-            m_hype.startSpeed = cur_velocity;
-            Debug.Log(cur_velocity);
-            if (m_hype.startSpeed.constant < min_speed)
+            m_hype_b.startSpeed = cur_velocity;
+            if (m_hype_b.startSpeed.constant < min_speed)
             {
                 //Clears the particle system if speed is too low
                 m_hyperspace_b.Clear();
                 m_hyperspace_b.Stop();
                 m_tooslow_b = true;
             }
-            else if (m_hype.startSpeed.constant > min_speed)
+            else if (m_hype_b.startSpeed.constant > min_speed)
             {
                 if (m_tooslow_b)
                 {
