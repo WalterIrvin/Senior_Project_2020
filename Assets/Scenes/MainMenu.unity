@@ -822,6 +822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f64b3e4f3f19ae54a93b7e4f3fbe31aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_player: {fileID: 1474966254}
 --- !u!1 &1182130150
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,6 +1226,18 @@ Skybox:
   m_GameObject: {fileID: 1372130901}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 2100000, guid: e70e488264c6880499106303de3455a7, type: 2}
+--- !u!114 &1474966254 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1695570549876043698, guid: bfe0367c843bfce4980aef9401ff67b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 454923289}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50919c69495323e47baad4f63816851e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1960504684
 GameObject:
   m_ObjectHideFlags: 0

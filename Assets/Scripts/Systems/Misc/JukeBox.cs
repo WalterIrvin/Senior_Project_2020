@@ -15,8 +15,15 @@ public class JukeBox : MonoBehaviour
     void Shuffle()
     {
         //Picks a random int
-        m_selection = m_randomizer.Next(0, m_musicTracks.Count);
+        int new_selection = m_randomizer.Next(0, m_musicTracks.Count);
+        if (new_selection == m_selection)
+            Shuffle();
+        m_selection = new_selection;
         Debug.Log(m_selection);
+    }
+    public void Stop()
+    {
+        m_speaker.Stop();
     }
     void Update()
     {

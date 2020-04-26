@@ -12,6 +12,7 @@ public class RoundUpdater : MonoBehaviour
     private int m_bestOutOf = MatchChecker.MatchBestOf;
     public List<Player> m_playerList = new List<Player>();
     private float m_curTime = 0f;
+    public JukeBox m_JukeBox;
     private void Update()
     {
         m_curTime += Time.deltaTime;
@@ -83,6 +84,10 @@ public class RoundUpdater : MonoBehaviour
                     //If the difference between highest and second highest is equivalent to the minimum needed to win, the match ends.
                     winning_player = max_player.name;
                     BuildSubjectLogic.AllPlayerInfo = new List<PlayerInfo>();
+                    if(m_JukeBox != null)
+                    {
+                        m_JukeBox.Stop();
+                    }
                     SceneManager.LoadScene("EndScreen");
                 }
             }
