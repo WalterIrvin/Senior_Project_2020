@@ -154,6 +154,7 @@ public class BuildSubjectLogic : MonoBehaviour
         m_textRef.SetText("");
         m_textRef.gameObject.SetActive(false);
         m_defaultTextRef.gameObject.SetActive(true);
+        m_defaultTextRef.text = "Enter Name...";
         PlayerInfo newPlayer = new PlayerInfo(m_currentPlayerId, finalName, m_placedWeapons);
         AllPlayerInfo.Add(newPlayer);
         UpdateBuildText();
