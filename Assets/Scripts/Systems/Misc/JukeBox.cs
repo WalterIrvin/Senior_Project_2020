@@ -11,6 +11,7 @@ public class JukeBox : MonoBehaviour
     void Start()
     {
         m_randomizer = new System.Random();
+        Shuffle();
     }
     void Shuffle()
     {
@@ -19,7 +20,6 @@ public class JukeBox : MonoBehaviour
         if (new_selection == m_selection)
             Shuffle();
         m_selection = new_selection;
-        Debug.Log(m_selection);
     }
     public void Stop()
     {

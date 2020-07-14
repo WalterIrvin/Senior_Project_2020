@@ -45,13 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_musicTracks:
-  - {fileID: 8300000, guid: fbd00cbfa1a13374cb24ad2470c5b049, type: 3}
+  - {fileID: 8300000, guid: e6c70fefc09a8c341b2c74e90db4fbcb, type: 3}
   - {fileID: 8300000, guid: dab1ed980d633e74880676490b77852c, type: 3}
-  - {fileID: 8300000, guid: 9b783dad631a2354abc4ef539628391e, type: 3}
-  - {fileID: 8300000, guid: 5ba4ce920f9288547a3b660c0fa83bff, type: 3}
   - {fileID: 8300000, guid: ae847cc84dd54e94fa3bd08df1cb8b9b, type: 3}
   - {fileID: 8300000, guid: 5af76ce5dd5a96a4e870206975941414, type: 3}
-  - {fileID: 8300000, guid: e6c70fefc09a8c341b2c74e90db4fbcb, type: 3}
+  - {fileID: 8300000, guid: 98ea618fb82bbe94ca79ecd5a880edec, type: 3}
   m_speaker: {fileID: 6349112531861687116}
 --- !u!82 &6349112531861687116
 AudioSource:
@@ -65,7 +63,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0

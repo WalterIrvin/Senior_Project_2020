@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
                 m_deathAnimation.Stop();
                 m_coreRef.SetActive(false);
             }
+            RespawnCheck();
         }
     }
     public void Respawn()
@@ -55,6 +56,7 @@ public class Player : MonoBehaviour
         m_curHealth = m_maxHealth;
         m_coreRef.SetActive(true);
         m_curRespawnTime = 0;
+        m_alreadyDead = false;
     }
     public void RespawnCheck()
     {
@@ -65,7 +67,6 @@ public class Player : MonoBehaviour
             if (m_curRespawnTime >= m_respawnTime)
             {
                 Respawn();
-                m_alreadyDead = false;
             }
         }
     }

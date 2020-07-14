@@ -11,7 +11,7 @@ public class LevelSwitcher : MonoBehaviour
     {
         if (m_player != null)
         {
-            m_player.Stop();
+            //m_player.Stop();
         }
         SceneManager.LoadScene(name);
     }

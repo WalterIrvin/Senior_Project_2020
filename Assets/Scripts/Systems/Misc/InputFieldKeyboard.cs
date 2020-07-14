@@ -15,6 +15,16 @@ public class InputFieldKeyboard : MonoBehaviour
     public GameObject m_firstKey;
     public TextMeshProUGUI m_textRef;
     public TextMeshProUGUI m_defaultRef;
+    public void Update()
+    {
+        if (m_defaultRef.text == "Enter Name...")
+        {
+            m_defaultRef.text = "";
+            m_defaultRef.gameObject.SetActive(false);
+            m_textRef.text = "Player" + BuildSubjectLogic.m_currentPlayerId;
+            m_textRef.gameObject.SetActive(true);
+        }
+    }
     public void OpenKeyboard()
     {
         if (EventSystem.current.alreadySelecting == false)
