@@ -1,11 +1,1 @@
 Base path: 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data', plugins path 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/PlaybackEngines'
-Cmd: initializeCompiler
-
-Cmd: compileComputeKernel
-  insize=3633 file=E:/Projects/Senior_Project_2020/Library/PackageCache/com.unity.render-pipelines.high-definition@10.4.0/Runtime/Lighting/LightLoop/materialflags.compute kernel=MaterialFlagsGen cachingPP=1 ppOnly=0 stripLineD=0 buildPlatform=19 km=<UNITY_VERSION=202036> pKW=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR uKW=SHADER_STAGE_COMPUTE platform=d3d11 flags=0 ok=1 outsize=4110
-
-Cmd: compileComputeKernel
-  insize=4336 file=E:/Projects/Senior_Project_2020/Library/PackageCache/com.unity.render-pipelines.high-definition@10.4.0/Runtime/ShaderLibrary/ResolveStencilBuffer.compute kernel=MAIN cachingPP=1 ppOnly=0 stripLineD=0 buildPlatform=19 km=<KERNEL_NAME=MAIN>,<NUM_SAMPLES=1>,<COARSE_STENCIL=1>,<UNITY_VERSION=202036> pKW=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR uKW=SHADER_STAGE_COMPUTE platform=d3d11 flags=0 ok=1 outsize=1081
-
-Cmd: initializeCompiler
-

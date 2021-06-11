@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6a64b3aef5c2f75438dc768ce19795cb
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 8404be70184654265930450def6a9037, type: 3}
+  generateWrapperCode: 1
+  wrapperCodePath: Assets/Scripts/Input/MasterInput.cs
+  wrapperClassName: 
+  wrapperCodeNamespace: 
