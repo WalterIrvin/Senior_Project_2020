@@ -19,6 +19,12 @@ namespace Assets.Scripts.Input
         private float strafe_acc = 50;
         private Rigidbody rb;
 
+        public float mesh_pitchrate = 2.5f;
+        public float mesh_rollrate = 3.5f;
+        public float player_pitchrate = 2.5f;
+        public float player_rollrate = 3.5f;
+        private Vector2 centerpoint;
+
         // private float rot_speed = 90f;
 
         public void Start()
@@ -26,6 +32,7 @@ namespace Assets.Scripts.Input
             rb = this.gameObject.GetComponent<Rigidbody>();
             delta_move = new Vector2();
             delta_turn = new Vector2();
+            centerpoint = new Vector2(Screen.width / 2.0f, Screen.height / 2f);
             sqr_max_vel = 15000;
             velocity = Vector3.zero;
             turn_vel = Vector2.zero;
@@ -33,8 +40,9 @@ namespace Assets.Scripts.Input
 
         public void Update()
         {
-            LockCursor();
+            //LockCursor();
             UpdateMovement();
+            centerpoint = new Vector2(Screen.width / 2.0f, Screen.height / 2f);
             UpdateLook();
             
         }
@@ -45,8 +53,8 @@ namespace Assets.Scripts.Input
         }
         private void UpdateMovement()
         {
-            Vector3 forward = this.transform.forward;
-            Vector3 right = this.transform.right;
+            Vector3 forward = transform.forward;
+            Vector3 right = transform.right;
             float delta_forward = delta_move.y * throttle_acc;
             float delta_right = delta_move.x * strafe_acc;
             Vector3 acc_vec = (forward * delta_forward) + (right * delta_right);
@@ -60,8 +68,8 @@ namespace Assets.Scripts.Input
         {
             float pitch_amt = -delta_turn.y * 0.01f;
             float  roll_amt = -delta_turn.x * 0.01f;
-            Vector3 pitch = this.transform.right * pitch_amt;
-            Vector3 roll = this.transform.forward * roll_amt;
+            Vector3 pitch = pitch_amt * player_pitchrate * transform.right;
+            Vector3 roll = player_rollrate * roll_amt * transform.forward;
             rb.AddTorque(pitch, ForceMode.Acceleration);
             rb.AddTorque(roll, ForceMode.Acceleration);
 
@@ -71,16 +79,16 @@ namespace Assets.Scripts.Input
             }
             else
             {
-                turn_dampener = Vector2.SmoothDamp(turn_dampener, delta_turn, ref turn_vel, 1.5f);
+                turn_dampener = Vector2.SmoothDamp(turn_dampener, delta_turn, ref turn_vel, 0.33f);
             }
             float mesh_pitch = -turn_dampener.y;
             float mesh_roll = -turn_dampener.x;
-            MeshTurn(mesh_pitch * 2.5f, mesh_roll * 2.5f);
+            MeshTurn(mesh_pitch * mesh_pitchrate, mesh_roll * mesh_rollrate);
         }
         private void MeshMove(Vector3 acc_vec)
         {
             // pushes player mesh towards direction of acceleration for smooth effect.
-            Vector3 target = this.transform.position + (acc_vec * 0.1f);
+            Vector3 target = transform.position + (acc_vec * 0.1f);
             playermesh_ref.transform.position = Vector3.SmoothDamp(playermesh_ref.transform.position, target, ref velocity, 1.5f);
         }
 
@@ -88,7 +96,7 @@ namespace Assets.Scripts.Input
         {
             // Turns player mesh towards torque direction for smooth movement
             Quaternion new_rot = Quaternion.Euler(pitch, 0, roll);
-            playermesh_ref.transform.rotation = this.transform.rotation * new_rot;
+            playermesh_ref.transform.rotation = transform.rotation * new_rot;
         }
 
         
@@ -101,8 +109,17 @@ namespace Assets.Scripts.Input
 
         public void Look(InputAction.CallbackContext context)
         {
-            Vector2 ctx = context.ReadValue<Vector2>();
-            delta_turn = ctx;
+            Vector2 delta = -(centerpoint - Mouse.current.position.ReadValue());
+            if (delta.sqrMagnitude < 4000)
+            {
+                delta = Vector2.zero;
+            }
+            else if (delta.sqrMagnitude > 20000)
+            {
+                float max_delta_mag = 600;
+                delta = Vector2.ClampMagnitude(delta, max_delta_mag);
+            }
+            delta_turn = delta / 50f;
         }
 
         public void Fire(InputAction.CallbackContext context)
