@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerGUI : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class PlayerGUI : MonoBehaviour
     public GameObject target_template;
     private List<GameObject> target_list;
     private List<GameObject> icon_list;
+    public Color forward_color;
+    public Color behind_color;
+
     void Start()
     {
         icon_list = new List<GameObject>();
@@ -67,10 +71,30 @@ public class PlayerGUI : MonoBehaviour
 
                 Debug.Log("1: " + forward_angle + " 2: " + right_angle + " 3: " + up_angle);
 
-                t_vec += forward_angle * transform.forward;
-                t_vec += right_angle * transform.right;
-                t_vec += up_angle * transform.up;
-                icon_clone.transform.position += t_vec / 2f;
+                Color icon_color = new Color(255, 255, 255);
+                if (forward_angle < 90)
+                {
+                    icon_color.r = forward_color.r;
+                    icon_color.g = forward_color.g;
+                    icon_color.b = forward_color.b;
+                }
+                else
+                {
+                    icon_color.r = behind_color.r;
+                    icon_color.g = behind_color.g;
+                    icon_color.b = behind_color.b;
+                }
+
+                float vertical_offset = (up_angle / 180) * -170;
+                float horizontal_offset = -right_angle;
+                
+
+                t_vec += vertical_offset * icon_clone.transform.up;
+                t_vec += horizontal_offset * icon_clone.transform.right;
+
+
+                icon_clone.transform.position += t_vec;
+                icon_clone.GetComponent<Image>().color = icon_color;
 
             }
         }
