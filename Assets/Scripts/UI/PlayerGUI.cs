@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,11 +42,7 @@ public class PlayerGUI : MonoBehaviour
     {
         foreach (GameObject obj in target_list)
         {
-            if (obj == this.gameObject)
-            {
-                // TODO
-            }
-            else
+            if (obj != this.gameObject)
             {
                 Vector3 delta = obj.transform.position - transform.position;
                 Vector3 dir = delta.normalized;
@@ -69,10 +66,10 @@ public class PlayerGUI : MonoBehaviour
                 if (float.IsNaN(up_angle))
                     up_angle = 0;
 
-                Debug.Log("1: " + forward_angle + " 2: " + right_angle + " 3: " + up_angle);
+                //Debug.Log("1: " + forward_angle + " 2: " + right_angle + " 3: " + up_angle);
 
                 Color icon_color = new Color(255, 255, 255);
-                if (forward_angle < 90)
+                if (forward_angle <= 90)
                 {
                     icon_color.r = forward_color.r;
                     icon_color.g = forward_color.g;
@@ -85,8 +82,8 @@ public class PlayerGUI : MonoBehaviour
                     icon_color.b = behind_color.b;
                 }
 
-                float vertical_offset = (up_angle / 180) * -170;
-                float horizontal_offset = -right_angle;
+                float vertical_offset = (up_angle / 180) * -300;
+                float horizontal_offset = (right_angle / 180) * -300;
                 
 
                 t_vec += vertical_offset * icon_clone.transform.up;
@@ -95,6 +92,7 @@ public class PlayerGUI : MonoBehaviour
 
                 icon_clone.transform.position += t_vec;
                 icon_clone.GetComponent<Image>().color = icon_color;
+                icon_clone.GetComponentInChildren<TextMeshProUGUI>().text = "" + Mathf.RoundToInt(delta.magnitude);
 
             }
         }
