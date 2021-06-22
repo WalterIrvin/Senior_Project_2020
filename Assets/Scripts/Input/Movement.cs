@@ -46,6 +46,7 @@ namespace Assets.Scripts.Input
             UpdateLook();
             
         }
+
         private void LockCursor()
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -124,7 +125,7 @@ namespace Assets.Scripts.Input
 
         public void Fire(InputAction.CallbackContext context)
         {
-            //Debug.Log(context.ReadValue<float>());
+            gameObject.GetComponent<Weapon>().FireWeapon();
         }
 
 
