@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Input
 {
     public class Movement : MonoBehaviour
     {
+        public GameObject speedbar_ref;
         public GameObject playermesh_ref;
         private Vector3 velocity;
 
@@ -33,7 +35,7 @@ namespace Assets.Scripts.Input
             delta_move = new Vector2();
             delta_turn = new Vector2();
             centerpoint = new Vector2(Screen.width / 2.0f, Screen.height / 2f);
-            sqr_max_vel = 15000;
+            sqr_max_vel = 6500;
             velocity = Vector3.zero;
             turn_vel = Vector2.zero;
         }
@@ -105,7 +107,21 @@ namespace Assets.Scripts.Input
         {
             //input context ref: [strafe, throttle]
             Vector2 ctx = context.ReadValue<Vector2>();
-            delta_move = ctx;
+            delta_move.x = ctx.x;
+            float diff = (ctx.y / 100) * 10;
+            if (delta_move.y + diff > 0 && delta_move.y + diff <= 1)
+            {
+                delta_move.y += diff;
+            }
+            else if (delta_move.y + diff > 1)
+            {
+                delta_move.y = 1;
+            }
+            else
+            {
+                delta_move.y = 0;
+            }
+            speedbar_ref.GetComponent<Image>().fillAmount = delta_move.y;
         }
 
         public void Look(InputAction.CallbackContext context)
@@ -121,11 +137,6 @@ namespace Assets.Scripts.Input
                 delta = Vector2.ClampMagnitude(delta, max_delta_mag);
             }
             delta_turn = delta / 50f;
-        }
-
-        public void Fire(InputAction.CallbackContext context)
-        {
-            gameObject.GetComponent<Weapon>().FireWeapon();
         }
 
 
