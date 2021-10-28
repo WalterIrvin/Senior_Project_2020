@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class PlayerGUI : MonoBehaviour
 {
@@ -14,8 +15,11 @@ public class PlayerGUI : MonoBehaviour
     public Color forward_color;
     public Color behind_color;
 
+    public PhotonView view;
+
     void Start()
     {
+        view = GetComponent<PhotonView>();
         icon_list = new List<GameObject>();
     }
 
@@ -133,6 +137,9 @@ public class PlayerGUI : MonoBehaviour
 
     void Update()
     {
-        UpdateTracker();
+        if (view.IsMine)
+        {
+            UpdateTracker();
+        }
     }
 }

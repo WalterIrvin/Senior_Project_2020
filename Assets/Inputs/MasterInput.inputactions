@@ -1,5 +1,5 @@
 {
-    "name": "Player",
+    "name": "MasterInput",
     "maps": [
         {
             "name": "Player",
@@ -25,6 +25,22 @@
                     "name": "Fire",
                     "type": "Button",
                     "id": "03ff680a-18f0-4330-bbb6-d2d84c81e0b3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "e7ee3d3b-f197-4f41-9522-69562775add1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Firemode",
+                    "type": "Button",
+                    "id": "50d8225e-edcd-4705-ae1d-ee3ae93ed1fb",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -248,6 +264,28 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e6ae7654-ae76-445b-b919-afd8a6aa1c5e",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8207f830-b713-4326-9b1d-f98b0d3310d6",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Firemode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

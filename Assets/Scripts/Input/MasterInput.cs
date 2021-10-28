@@ -41,6 +41,22 @@ public class @MasterInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""e7ee3d3b-f197-4f41-9522-69562775add1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Firemode"",
+                    ""type"": ""Button"",
+                    ""id"": ""50d8225e-edcd-4705-ae1d-ee3ae93ed1fb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -261,6 +277,28 @@ public class @MasterInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""XR"",
                     ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6ae7654-ae76-445b-b919-afd8a6aa1c5e"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8207f830-b713-4326-9b1d-f98b0d3310d6"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Firemode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -841,6 +879,8 @@ public class @MasterInput : IInputActionCollection, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+        m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
+        m_Player_Firemode = m_Player.FindAction("Firemode", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -905,6 +945,8 @@ public class @MasterInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
+    private readonly InputAction m_Player_Reload;
+    private readonly InputAction m_Player_Firemode;
     public struct PlayerActions
     {
         private @MasterInput m_Wrapper;
@@ -912,6 +954,8 @@ public class @MasterInput : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
+        public InputAction @Reload => m_Wrapper.m_Player_Reload;
+        public InputAction @Firemode => m_Wrapper.m_Player_Firemode;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -930,6 +974,12 @@ public class @MasterInput : IInputActionCollection, IDisposable
                 @Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                @Reload.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
+                @Firemode.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFiremode;
+                @Firemode.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFiremode;
+                @Firemode.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFiremode;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -943,6 +993,12 @@ public class @MasterInput : IInputActionCollection, IDisposable
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
+                @Firemode.started += instance.OnFiremode;
+                @Firemode.performed += instance.OnFiremode;
+                @Firemode.canceled += instance.OnFiremode;
             }
         }
     }
@@ -1102,6 +1158,8 @@ public class @MasterInput : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
+        void OnFiremode(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
