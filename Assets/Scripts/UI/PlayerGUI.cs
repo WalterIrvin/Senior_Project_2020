@@ -25,7 +25,7 @@ public class PlayerGUI : MonoBehaviour
 
     void FindTargets()
     {
-        target_list = new List<GameObject>(GameObject.FindGameObjectsWithTag("Target"));
+        target_list = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
     }
 
     void ClearMap()

@@ -4,11 +4,14 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Photon.Pun;
 using TMPro;
+using Assets.Scripts.Utility;
 
 namespace Assets.Scripts.Input
 {
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviourPunCallbacks, Assets.Scripts.Utility.IDamageable
     {
+        public LineRenderer line_render;
+        private float max_health;
         public float health = 100f;
         public float score = 0f;
         public Camera cam_ref;
@@ -18,8 +21,11 @@ namespace Assets.Scripts.Input
         public GameObject ammo;
         public GameObject bullet;
         public GameObject spawnpoint;
-        public int mag_size = 20;
+        public GameObject health_ref;
+        public int mag_size = 21;
         float delay = 0.1f;
+        public float damage = 10f;
+        public float range = 1000f;
         private bool firing = false;
         private int fired = 0;
         private float reload_time = 4f;
@@ -39,7 +45,7 @@ namespace Assets.Scripts.Input
         private Vector2 turn_vel;
 
         private Vector2 delta_move = Vector2.zero;
-        private float sqr_max_vel;
+        public float sqr_max_vel = 6500;
         private float throttle_acc = 75;
         private float strafe_acc = 50;
         private Rigidbody rb;
@@ -57,6 +63,7 @@ namespace Assets.Scripts.Input
 
         public void Start()
         {
+            max_health = health;
             view = GetComponent<PhotonView>();
             if (!view.IsMine)
             {
@@ -67,7 +74,6 @@ namespace Assets.Scripts.Input
             delta_move = new Vector2();
             delta_turn = new Vector2();
             centerpoint = new Vector2(Screen.width / 2.0f, Screen.height / 2f);
-            sqr_max_vel = 6500;
             velocity = Vector3.zero;
             turn_vel = Vector2.zero;
         }
@@ -95,17 +101,22 @@ namespace Assets.Scripts.Input
                 }
                 if (fired >= mag_size)
                 {
+                    line_render.enabled = false;
+                    //SyncCloseLine();
                     Reload();
                 }
                 delay -= Time.deltaTime;
                 if (delay <= 0)
                 {
+                    line_render.enabled = false;
+                    //SyncCloseLine();
                     delay = 0;
                     reloading = false;
                     ammo.GetComponent<TextMeshProUGUI>().text = "Ammo: (" + (mag_size - fired) + ")";
                 }
                 if (firing && delay <= 0)
                 {
+                    line_render.enabled = true;
                     switch (fire_rate)
                     {
                         case 0:
@@ -130,6 +141,28 @@ namespace Assets.Scripts.Input
 
             GameObject new_bullet = PhotonNetwork.Instantiate(bullet.name, pos, Quaternion.identity);
             new_bullet.GetComponent<Bullet>().Fire(this, pos, forward);
+            delay = 0.1f;
+            fired += 1;
+            ammo.GetComponent<TextMeshProUGUI>().text = "Ammo: (" + (mag_size - fired) + ")";
+        }
+
+        private void Fire_Ray()
+        {
+            Vector3 pos = spawnpoint.transform.position;
+            Vector3 forward = playermesh_ref.transform.forward;
+            line_render.SetPosition(0, pos);
+            line_render.SetPosition(1, pos + forward * range);
+            RaycastHit hit;
+            if(Physics.Raycast(cam_ref.transform.position, cam_ref.transform.forward, out hit, range))
+            {
+                line_render.SetPosition(1, hit.transform.position);
+                Player target = hit.transform.GetComponent<Player>();
+                if (target != null)
+                {
+                    target.TakeDamage(damage);
+                    //SyncDrawLine(pos, hit.transform.position);
+                }
+            }
             delay = 0.1f;
             fired += 1;
             ammo.GetComponent<TextMeshProUGUI>().text = "Ammo: (" + (mag_size - fired) + ")";
@@ -172,7 +205,7 @@ namespace Assets.Scripts.Input
         {
             if (burst_fired < burst_amt)
             {
-                Spawn_Bullet();
+                Fire_Ray();
                 burst_fired += 1;
             }
             else
@@ -183,12 +216,12 @@ namespace Assets.Scripts.Input
         }
         public void Semi_Auto()
         {
-            Spawn_Bullet();
+            Fire_Ray();
             firing = false;
         }
         public void Full_Auto()
         {
-            Spawn_Bullet();
+            Fire_Ray();
         }
         public void OnReload(InputAction.CallbackContext context)
         {
@@ -337,38 +370,65 @@ namespace Assets.Scripts.Input
             }
         }
 
-        public void onBulletHit(Player source, float dmg)
+        void Die()
         {
-            if (view.IsMine)
+            PhotonNetwork.Destroy(view);
+        }
+
+        public void TakeDamage(float damage)
+        {
+            view.RPC("RPC_TakeDamage", RpcTarget.All, damage);
+        }
+
+        public void SyncDrawLine(Vector3 source, Vector3 dest)
+        {
+            view.RPC("RPC_SyncDrawLine", RpcTarget.All, source, dest);
+        }
+
+        public void SyncCloseLine()
+        {
+            view.RPC("RPC_SyncCloseLine", RpcTarget.All);
+        }
+        [PunRPC]
+        void RPC_SyncCloseLine()
+        {
+            if (!view.IsMine)
             {
-                Debug.Log("Testing");
-                health -= dmg;
+                return;
+            }
+            line_render.enabled = false;
+        }
+        [PunRPC]
+        void RPC_SyncDrawLine(Vector3 source, Vector3 dest)
+        {
+            line_render.enabled = true;
+            if (!view.IsMine)
+            {
+                return;
+            }
+            line_render.SetPosition(0, source);
+            line_render.SetPosition(1, dest);
+        }
+        [PunRPC]
+        void RPC_TakeDamage(float damage)
+        {
+            if (!view.IsMine)
+            {
+                return;
+            }
+            else
+            {
+                health -= damage;
+                TextMeshProUGUI health_text = health_ref.GetComponent<TextMeshProUGUI>();
+                if (health_text != null)
+                {
+                    health_text.text = "Health: " + health + "/" + max_health;
+                }
                 if (health <= 0)
                 {
-                    onDie();
-                    source.onKill();
+                    Die();
                 }
             }
         }
-        private void onKill()
-        {
-            if (view.IsMine)
-            {
-                score += 1;
-            }
-        }
-        private void onDie()
-        {
-            if (view.IsMine)
-            {
-                health = 100f;
-                this.transform.position = Vector3.zero;
-                delta_move = Vector2.zero;
-                turn_vel = Vector2.zero;
-                Reload();
-            }
-        }
-
-
     }
 }
