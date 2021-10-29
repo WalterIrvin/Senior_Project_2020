@@ -323,8 +323,8 @@ namespace Assets.Scripts.Input
         }
         private void UpdateLook()
         {
-            float pitch_amt = -delta_turn.y * 0.01f;
-            float  roll_amt = -delta_turn.x * 0.01f;
+            float pitch_amt = -delta_turn.y * Time.deltaTime;
+            float  roll_amt = -delta_turn.x * Time.deltaTime;
             Vector3 pitch = pitch_amt * player_pitchrate * transform.right;
             Vector3 roll = player_rollrate * roll_amt * transform.forward;
             rb.AddTorque(pitch, ForceMode.Acceleration);
