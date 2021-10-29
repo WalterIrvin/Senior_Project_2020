@@ -11,9 +11,7 @@ public class Jukebox : MonoBehaviour
     void Start()
     {
         randomizer = new System.Random();
-        speaker.clip = music_tracks[index];
-        speaker.Play();
-        //Shuffle();
+        Shuffle();
     }
 
     void Update()

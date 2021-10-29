@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 public class Setup : MonoBehaviourPunCallbacks
 {
     string create_room = "default";
     string join_room = "default";
-    
+    private void Start()
+    {
+        Cursor.visible = true;
+    }
+    public void TitleScreen()
+    {
+        SceneManager.LoadScene("title_screen");
+    }
     public void updateCreateRoom(string input)
     {
         create_room = input;

@@ -10,20 +10,22 @@ namespace Assets.Scripts.Input
 {
     public class Player : MonoBehaviourPunCallbacks, Assets.Scripts.Utility.IDamageable
     {
+        public TextMeshProUGUI deathCounter;
+        public AudioSource laser;
         public LineRenderer line_render;
         private float max_health;
         public float health = 100f;
-        public float score = 0f;
+        private int score = 1;
         public Camera cam_ref;
         public GameObject ui_ref;
-        PhotonView view;
+        public PhotonView view;
         public GameObject fire_type;
         public GameObject ammo;
         public GameObject bullet;
         public GameObject spawnpoint;
         public GameObject health_ref;
-        public int mag_size = 21;
-        float delay = 0.1f;
+        public int mag_size = 120;
+        float delay = 0.06f;
         public float damage = 10f;
         public float range = 1000f;
         private bool firing = false;
@@ -59,14 +61,16 @@ namespace Assets.Scripts.Input
         private float delta_spd = 0;
         private bool accelerating = false;
 
-        // private float rot_speed = 90f;
+        public PlayerManager player_manager;
 
-        public void Start()
+        // private float rot_speed = 90f;
+        void Awake()
         {
+            player_manager = PhotonView.Find((int)view.InstantiationData[0]).GetComponent<PlayerManager>();
             max_health = health;
-            view = GetComponent<PhotonView>();
             if (!view.IsMine)
             {
+                cam_ref.GetComponent<AudioListener>().enabled = false;
                 cam_ref.enabled = false;
                 ui_ref.SetActive(false);
             }
@@ -76,12 +80,15 @@ namespace Assets.Scripts.Input
             centerpoint = new Vector2(Screen.width / 2.0f, Screen.height / 2f);
             velocity = Vector3.zero;
             turn_vel = Vector2.zero;
+            if (score == 1)
+                score = 0;
         }
 
         public void Update()
         {
             if (view.IsMine)
             {
+                deathCounter.text = "Deaths: " + -score;
                 LockCursor();
                 UpdateMovement();
                 UpdateFire();
@@ -89,6 +96,14 @@ namespace Assets.Scripts.Input
                 UpdateLook();
             }
             
+        }
+        public int getScore()
+        {
+            return score;
+        }
+        public void setScore(int value)
+        {
+            score = value;
         }
         // WEAPON SECTION
         private void UpdateFire()
@@ -148,6 +163,8 @@ namespace Assets.Scripts.Input
 
         private void Fire_Ray()
         {
+            if(!laser.isPlaying)
+                laser.Play();
             Vector3 pos = spawnpoint.transform.position;
             Vector3 forward = playermesh_ref.transform.forward;
             line_render.SetPosition(0, pos);
@@ -155,7 +172,8 @@ namespace Assets.Scripts.Input
             RaycastHit hit;
             if(Physics.Raycast(cam_ref.transform.position, cam_ref.transform.forward, out hit, range))
             {
-                line_render.SetPosition(1, hit.transform.position);
+                if (hit.transform.gameObject.tag != "Neutral")
+                    line_render.SetPosition(1, hit.transform.position);
                 Player target = hit.transform.GetComponent<Player>();
                 if (target != null)
                 {
@@ -163,7 +181,7 @@ namespace Assets.Scripts.Input
                     //SyncDrawLine(pos, hit.transform.position);
                 }
             }
-            delay = 0.1f;
+            delay = 0.06f;
             fired += 1;
             ammo.GetComponent<TextMeshProUGUI>().text = "Ammo: (" + (mag_size - fired) + ")";
         }
@@ -372,7 +390,8 @@ namespace Assets.Scripts.Input
 
         void Die()
         {
-            PhotonNetwork.Destroy(view);
+            if (player_manager != null)
+                player_manager.Die(this.gameObject);
         }
 
         public void TakeDamage(float damage)
@@ -429,6 +448,11 @@ namespace Assets.Scripts.Input
                     Die();
                 }
             }
+        }
+
+        public void Win()
+        {
+
         }
     }
 }

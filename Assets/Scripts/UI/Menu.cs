@@ -20,7 +20,6 @@ public class Menu : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedLobby()
     {
-        Debug.Log("Joining Lobby...");
         SceneManager.LoadScene("setup_screen");
     }
     // Update is called once per frame
@@ -44,6 +43,6 @@ public class Menu : MonoBehaviourPunCallbacks
 
     public void QuitGame()
     {
-        Debug.Log("Quit Game!");
+        Application.Quit();
     }
 }
