@@ -22,7 +22,7 @@ public class @MasterInput : IInputActionCollection, IDisposable
                     ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""1841332b-e9e0-4e4a-949f-6026e86fce86"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Vector3"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -57,6 +57,14 @@ public class @MasterInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Roll"",
+                    ""type"": ""Value"",
+                    ""id"": ""153044bc-b156-48ea-8f20-ef39dcddd588"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -72,7 +80,7 @@ public class @MasterInput : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""WASD"",
+                    ""name"": ""Arrows"",
                     ""id"": ""00ca640b-d935-4593-8157-c05846ea39b3"",
                     ""path"": ""Dpad"",
                     ""interactions"": """",
@@ -85,17 +93,6 @@ public class @MasterInput : IInputActionCollection, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""e2062cb9-1b15-46a2-838c-2f8d72a0bdd9"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""8180e8bd-4097-4f4e-ab88-4523101a6ce9"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -107,17 +104,6 @@ public class @MasterInput : IInputActionCollection, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""320bffee-a40b-4347-ac70-c210eb8bc73a"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""1c5327b5-f71c-4f60-99c7-4e737386f1d1"",
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -129,17 +115,6 @@ public class @MasterInput : IInputActionCollection, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""d2581a9b-1d11-4566-b27d-b92aff5fabbc"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""2e46982e-44cc-431b-9f0b-c11910bf467a"",
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -151,17 +126,6 @@ public class @MasterInput : IInputActionCollection, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""fcfe95b8-67b9-4526-84b5-5d0bc98d6400"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""77bff152-3580-4b21-b6de-dcd0c7e41164"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -205,17 +169,6 @@ public class @MasterInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8c8e490b-c610-4785-884f-f04217b23ca4"",
-                    ""path"": ""<Pointer>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse;Touch"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""3e5f5442-8668-4b27-a940-df99bad7e831"",
                     ""path"": ""<Joystick>/{Hatswitch}"",
                     ""interactions"": """",
@@ -224,6 +177,61 @@ public class @MasterInput : IInputActionCollection, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""50064f9a-a916-41d7-a063-94ba7078162e"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""a91d5b0f-1894-40d8-879d-b936569066b1"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""14786541-f597-40cb-9dac-e03251a1b475"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""b48a2d29-5254-4d5c-af65-ef708837d9ef"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""90cab6bd-68a5-477b-98a5-d67673538c0a"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -301,6 +309,39 @@ public class @MasterInput : IInputActionCollection, IDisposable
                     ""action"": ""Firemode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""QE"",
+                    ""id"": ""0ee13082-a5de-45ea-adbb-4256157595ce"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""e24372d9-f3b0-48de-bfe1-83481a23578f"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""1e373191-74f8-4a33-88ae-585008e33fb5"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -881,6 +922,7 @@ public class @MasterInput : IInputActionCollection, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
         m_Player_Firemode = m_Player.FindAction("Firemode", throwIfNotFound: true);
+        m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -947,6 +989,7 @@ public class @MasterInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Reload;
     private readonly InputAction m_Player_Firemode;
+    private readonly InputAction m_Player_Roll;
     public struct PlayerActions
     {
         private @MasterInput m_Wrapper;
@@ -956,6 +999,7 @@ public class @MasterInput : IInputActionCollection, IDisposable
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Reload => m_Wrapper.m_Player_Reload;
         public InputAction @Firemode => m_Wrapper.m_Player_Firemode;
+        public InputAction @Roll => m_Wrapper.m_Player_Roll;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -980,6 +1024,9 @@ public class @MasterInput : IInputActionCollection, IDisposable
                 @Firemode.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFiremode;
                 @Firemode.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFiremode;
                 @Firemode.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFiremode;
+                @Roll.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
+                @Roll.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
+                @Roll.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -999,6 +1046,9 @@ public class @MasterInput : IInputActionCollection, IDisposable
                 @Firemode.started += instance.OnFiremode;
                 @Firemode.performed += instance.OnFiremode;
                 @Firemode.canceled += instance.OnFiremode;
+                @Roll.started += instance.OnRoll;
+                @Roll.performed += instance.OnRoll;
+                @Roll.canceled += instance.OnRoll;
             }
         }
     }
@@ -1160,6 +1210,7 @@ public class @MasterInput : IInputActionCollection, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnFiremode(InputAction.CallbackContext context);
+        void OnRoll(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

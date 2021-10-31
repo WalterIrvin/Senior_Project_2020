@@ -20,7 +20,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        CreateController(0);
+        //CreateController(0);
     }
 
     private void Update()
@@ -71,10 +71,14 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     }
     private void CreateController(int customScore)
     {
-        Debug.Log("custom score: " + customScore);
-        Vector3 randomPos = new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), Random.Range(minZ, maxZ));
-        GameObject tmp = PhotonNetwork.Instantiate(playerPrefab.name, randomPos, Quaternion.identity, 0, new object[] { view.ViewID });
-        tmp.GetComponent<Player>().setScore(customScore);
+        try
+        {
+            Debug.Log("custom score: " + customScore);
+            Vector3 randomPos = new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), Random.Range(minZ, maxZ));
+            GameObject tmp = PhotonNetwork.Instantiate(playerPrefab.name, randomPos, Quaternion.identity, 0, new object[] { view.ViewID });
+            tmp.GetComponent<Player>().setScore(customScore);
+        }
+        catch (System.Exception e) { }
     }
 
     public void Die(GameObject obj)

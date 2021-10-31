@@ -8,6 +8,11 @@ using Photon.Pun;
 public class PlayerGUI : MonoBehaviour
 {
     //Handles the GUI aspects of a player: health, throttle, and minimap
+    public GameObject health;
+    public GameObject ammo;
+    public GameObject deaths;
+    public GameObject fire_mode;
+
     public GameObject minimap_ref;
     public GameObject target_template;
     private List<GameObject> target_list;
@@ -19,7 +24,6 @@ public class PlayerGUI : MonoBehaviour
 
     void Start()
     {
-        view = GetComponent<PhotonView>();
         icon_list = new List<GameObject>();
     }
 

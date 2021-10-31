@@ -66,7 +66,14 @@ namespace Assets.Scripts.Input
         // private float rot_speed = 90f;
         void Awake()
         {
-            player_manager = PhotonView.Find((int)view.InstantiationData[0]).GetComponent<PlayerManager>();
+            try
+            {
+                player_manager = PhotonView.Find((int)view.InstantiationData[0]).GetComponent<PlayerManager>();
+            }
+            catch(System.Exception e)
+            {
+
+            }
             max_health = health;
             if (!view.IsMine)
             {
